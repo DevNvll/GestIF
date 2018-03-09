@@ -1,23 +1,33 @@
 import React from 'react'
-
-
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
 const MenuItem = props => {
+  const active = props.location.pathname === props.href
+  const isSubmenuActive = props.submenu
+    ? props.submenu.filter(i => {
+        return i.path === props.location.pathname
+      }).length >= 1 ? true : false
+    : null
+  const click = (href) => {
+    props.history.push(href)
+    
+  }
   return props.submenu !== undefined ? (
-    <li className={props.active ? 'active treeview' : 'treeview'}>
-      <a href="/">
+    <li className={isSubmenuActive ? 'active treeview' : 'treeview'}>
+      <a href="#">
         <i className="fa fa-files-o" />
         <span>{props.text}</span>
         <span className="pull-right-container">
-          <span className="label label-primary pull-right">4</span>
-        </span>
+            <i className="fa fa-angle-left pull-right" />
+          </span>
       </a>
-      <ul className="treeview-menu" style={{display: 'block'}}>
+      <ul className="treeview-menu">
         {props.submenu.map((item, i) => {
           return (
             <li key={i}>
-                <a href={item.href}>
+                <a onClick={() => click(item.path)} href={item.path}>
                   <i className={item.icon} />
-                  {item.text}
+                  <span>{item.text}</span>
                 </a>
             </li>
           )
@@ -25,8 +35,8 @@ const MenuItem = props => {
       </ul>
     </li>
   ) : (
-    <li className={props.active ? 'active treeview' : 'treeview'}>
-      <a href={props.href}>
+    <li className={active ? 'active treeview' : 'treeview'}>
+    <a onClick={() => click(props.href)} href={props.href}>
         <i className={props.icon} />
         <span>{props.text}</span>
       </a>
@@ -34,7 +44,7 @@ const MenuItem = props => {
   )
 }
 
-export default ({ menu, auth }) => (
+const SideBar = ({ menu, auth, location, history }) => (
   <aside className="main-sidebar">
     <section className="sidebar">
       <div className="user-panel">
@@ -80,10 +90,11 @@ export default ({ menu, auth }) => (
           return (
             <MenuItem
               key={i}
-              href={item.href ? item.href : undefined}
+              href={item.path ? item.path : undefined}
               text={item.text}
-              active={item.active}
-              submenu={item.submenu ? item.submenu : undefined}
+              location={location}
+              history={history}
+              submenu={item.routes ? item.routes : undefined}
               icon={item.icon}
             />
           )
@@ -92,3 +103,5 @@ export default ({ menu, auth }) => (
     </section>
   </aside>
 )
+
+export default withRouter(SideBar)
