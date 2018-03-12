@@ -20,6 +20,11 @@ const Menu = [
     icon: 'fa fa-clipboard'
   },
   {
+    text: "Estoque",
+    href: "/estoque",
+    icon: "fa fa-archive"
+  },
+  {
     text: 'Administração',
     icon: 'fa fa-cog',
     submenu: [
@@ -39,9 +44,9 @@ const Menu = [
 
 class Main extends Component {
   componentDidMount() {
-    if (!Auth.loggedIn()) {
-      Router.push('/login')
-    }
+    // if (!Auth.loggedIn()) {
+    //   Router.push('/login')
+    // }
   }
   render() {
     return (

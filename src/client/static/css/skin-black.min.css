@@ -72,6 +72,9 @@
 .skin-black .main-header li.user-header {
   background-color: #222;
 }
+.skin-black .main-header .sidebar-toggle:before {
+  content: "";
+}
 .skin-black .content-header {
   background: transparent;
   box-shadow: none;

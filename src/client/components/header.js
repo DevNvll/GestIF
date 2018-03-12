@@ -1,6 +1,6 @@
 export default ({ auth }) =>
   <header className="main-header">
-    <a href="index2.html" className="logo">
+    <a href="/" className="logo">
       <span className="logo-mini">
         <b>G</b>IF
       </span>
@@ -14,7 +14,7 @@ export default ({ auth }) =>
         className="sidebar-toggle"
         data-toggle="push-menu"
         role="button"
-      >
+      ><i className="fa fa-bars"></i>
         <span className="sr-only">Toggle navigation</span>
       </a>
       <div className="navbar-custom-menu">
