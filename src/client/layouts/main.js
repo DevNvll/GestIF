@@ -10,9 +10,9 @@ const Auth = new AuthService()
 
 const Menu = [
   {
-    text: 'Home',
+    text: 'Início',
     href: '/',
-    icon: 'fa fa-th'
+    icon: 'fa fa-home'
   },
   {
     text: 'Reports',
@@ -29,9 +29,9 @@ const Menu = [
         icon: 'fa fa-id-card'
       },
       {
-        text: 'Config 2',
+        text: 'Sistema',
         href: '/config2',
-        icon: 'fa fa-circle'
+        icon: 'fa fa-wrench'
       }
     ]
   }
@@ -50,6 +50,7 @@ class Main extends Component {
         <Header auth={Auth} />
         <Sidebar menu={Menu} auth={Auth} />
         {this.props.children}
+        <Footer/>
       </div>
     )
   }
