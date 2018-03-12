@@ -1,50 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom'
+import { Component } from 'react'
+import Link from 'next/link'
+import { withRouter } from 'next/router'
+
 const MenuItem = props => {
-  const active = props.location.pathname === props.href
+  const isActive = props.router.pathname === props.href
   const isSubmenuActive = props.submenu
     ? props.submenu.filter(i => {
-        return i.path === props.location.pathname
+        return i.href === props.router.pathname
       }).length >= 1 ? true : false
     : null
-  const click = (href) => {
-    props.history.push(href)
-    
-  }
   return props.submenu !== undefined ? (
-    <li className={isSubmenuActive ? 'active treeview' : 'treeview'}>
-      <a href="#">
-        <i className="fa fa-files-o" />
-        <span>{props.text}</span>
-        <span className="pull-right-container">
+    <li className={isSubmenuActive ? 'treeview menu-open active' : 'treeview'}>
+        <a href="#">
+          <i className={props.icon} />
+          <span>{props.text}</span>
+          <span className="pull-right-container">
             <i className="fa fa-angle-left pull-right" />
           </span>
-      </a>
+        </a>
       <ul className="treeview-menu">
         {props.submenu.map((item, i) => {
           return (
             <li key={i}>
-                <a onClick={() => click(item.path)} href={item.path}>
-                  <i className={item.icon} />
-                  <span>{item.text}</span>
+              <Link href={item.href}>
+              <a>
+                <i className={item.icon} />
+                {item.text}
                 </a>
+              </Link>
             </li>
           )
         })}
       </ul>
     </li>
   ) : (
-    <li className={active ? 'active treeview' : 'treeview'}>
-    <a onClick={() => click(props.href)} href={props.href}>
-        <i className={props.icon} />
-        <span>{props.text}</span>
-      </a>
+    <li className={isActive ? 'active treeview' : 'treeview'}>
+      <Link href={props.href}>
+        <a>
+          <i className={props.icon} />
+          <span>{props.text}</span>
+        </a>
+      </Link>
     </li>
   )
 }
 
-const SideBar = ({ menu, auth, location, history }) => (
+const SideBar = ({ menu, auth, router, url }) => (
   <aside className="main-sidebar">
     <section className="sidebar">
       <div className="user-panel">
@@ -85,16 +86,15 @@ const SideBar = ({ menu, auth, location, history }) => (
       </form>
 
       <ul className="sidebar-menu" data-widget="tree">
-        <li className="header">NAVEGAÇÂO</li>
+        <li className="header">NAVEGAÇÃO</li>
         {menu.map((item, i) => {
           return (
             <MenuItem
               key={i}
-              href={item.path ? item.path : undefined}
+              href={item.href ? item.href : undefined}
               text={item.text}
-              location={location}
-              history={history}
-              submenu={item.routes ? item.routes : undefined}
+              router={router}
+              submenu={item.submenu ? item.submenu : undefined}
               icon={item.icon}
             />
           )
