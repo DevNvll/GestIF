@@ -169,3 +169,13 @@
 .content-wrapper {
   background-color: rgba(255, 255, 255, 0.945) !important; 
 }
+
+::selection {
+  color: #fff;
+  background-color: #000;
+}
+
+::-moz-selection {
+  color: #fff;
+  background-color: #000;
+}

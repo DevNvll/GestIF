@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, Fragment } from 'react'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 
@@ -7,26 +7,32 @@ const MenuItem = props => {
   const isSubmenuActive = props.submenu
     ? props.submenu.filter(i => {
         return i.href === props.router.pathname
-      }).length >= 1 ? true : false
+      }).length >= 1
+      ? true
+      : false
     : null
+  const onClick = () => {
+    console.log('clocked')
+    window.Pace.start()
+  }
   return props.submenu !== undefined ? (
     <li className={isSubmenuActive ? 'treeview menu-open active' : 'treeview'}>
-        <a href="#">
-          <i className={props.icon} />
-          <span>{props.text}</span>
-          <span className="pull-right-container">
-            <i className="fa fa-angle-left pull-right" />
-          </span>
-        </a>
+      <a href="#">
+        <i className={props.icon} />
+        <span>{props.text}</span>
+        <span className="pull-right-container">
+          <i className="fa fa-angle-left pull-right" />
+        </span>
+      </a>
       <ul className="treeview-menu">
         {props.submenu.map((item, i) => {
           return (
             <li key={i}>
-              <Link href={item.href}>
-              <a>
-                <i className={item.icon} />
-                {item.text}
-                </a>
+              <Link prefetch href={item.href}>
+                  <a onClick={() => onClick()}>
+                    <i className={item.icon} />
+                    {item.text}
+                  </a>
               </Link>
             </li>
           )
@@ -35,11 +41,11 @@ const MenuItem = props => {
     </li>
   ) : (
     <li className={isActive ? 'active treeview' : 'treeview'}>
-      <Link href={props.href}>
-        <a>
-          <i className={props.icon} />
-          <span>{props.text}</span>
-        </a>
+      <Link prefetch href={props.href}>
+          <a>
+            <i className={props.icon} />
+            <span>{props.text}</span>
+          </a>
       </Link>
     </li>
   )

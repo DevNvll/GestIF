@@ -4,9 +4,15 @@ import Head from '../components/head'
 import Header from '../components/header'
 import Sidebar from '../components/sidebar'
 import Footer from '../components/footer'
+import Router from 'next/router'
 
 import AuthService from '../utils/AuthService'
 const Auth = new AuthService()
+
+
+Router.onRouteChangeStart = () => window.Pace.start()
+Router.onRouteChangeComplete = () => window.Pace.stop()
+Router.onRouteChangeError = () => window.Pace.stop()
 
 const Menu = [
   {
