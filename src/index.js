@@ -10,7 +10,7 @@ import User from './models/Users'
 
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost:27017/gestif', err =>
-  console.log('Conectado ao MongoDB')
+  console.log('> Conectado ao MongoDB')
 )
 
 const port = parseInt(process.env.PORT, 10) || 3000
