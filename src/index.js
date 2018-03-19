@@ -9,8 +9,9 @@ import api from './api'
 import User from './models/Users'
 
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/gestif', err =>
-  console.log('> Conectado ao MongoDB')
+mongoose.connect(
+  'mongodb://devnvll:99442047@ds119129.mlab.com:19129/gestif',
+  err => console.log('> Conectado ao MongoDB')
 )
 
 const port = parseInt(process.env.PORT, 10) || 3000

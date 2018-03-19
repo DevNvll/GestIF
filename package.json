@@ -1,9 +1,15 @@
 {
   "name": "gestif",
   "scripts": {
+    "predev": "start mongod",
     "dev": "backpack dev",
     "build": "next build ./src/client && backpack build",
-    "start": "NODE_ENV=production node build/main.js"
+    "start": "NODE_ENV=production node build/main.js",
+    "lint": "eslint src",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "@zeit/next-css": "^0.1.4",
@@ -20,5 +26,18 @@
     "react-dom": "^16.2.0",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.11.1"
   }
 }
