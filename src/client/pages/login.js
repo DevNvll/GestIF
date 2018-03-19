@@ -8,20 +8,23 @@ const auth = new AuthService()
 export default class Login extends Component {
   state = {}
   componentDidMount() {
-    // if (auth.loggedIn()) {
-    //   Router.push('/')
-    // }
+    if (auth.loggedIn()) {
+      Router.push('/')
+    }
   }
   onSubmit(e) {
     e.preventDefault()
+    window.Pace.start()
     auth
-      .login(e.target.username.value, e.target.password.value)
+      .login(e.target.email.value, e.target.password.value)
       .then(() => {
+        window.Pace.stop()
         Router.push('/')
       })
       .catch(err => {
-        if (err.message === 'LOGIN_FAIL') {
-          this.setState({ error: err.message })
+        window.Pace.stop()
+        if (err === 'LOGIN_FAIL') {
+          this.setState({ error: err })
         }
       })
   }
@@ -38,14 +41,14 @@ export default class Login extends Component {
           <div className="login-box-body">
             {this.state.error
               ? <center>
-                  <p className="text-red">Invalid credentials</p>
+                  <p className="text-red">Credenciais Inválidas</p>
                 </center>
               : <div />}
             <form onSubmit={this.onSubmit.bind(this)}>
               <div className="form-group has-feedback">
                 <input
                   type="text"
-                  name="username"
+                  name="email"
                   className="form-control"
                   placeholder="E-mail"
                 />

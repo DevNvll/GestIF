@@ -63,7 +63,7 @@ const SideBar = ({ menu, auth, router, url }) => (
           />
         </div>
         <div className="pull-left info">
-          <p>Henrick Mello</p>
+          <p>{auth.getProfile().name}</p>
           <a href="/">
             <i className="fa fa-circle text-success" /> Sala 213
           </a>

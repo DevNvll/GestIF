@@ -41,8 +41,10 @@ router.post('/', (req, res) => {
       })
     })
     .catch(err => {
-      console.log(err)
-      res.send('Error creating user')
+      res.json({
+        code: 'LOGIN_FAIL',
+        result: {}
+      })
     })
 })
 

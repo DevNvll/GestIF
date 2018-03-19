@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Link from 'next/link'
 import Head from '../components/head'
 import Header from '../components/header'
@@ -8,7 +8,6 @@ import Router from 'next/router'
 
 import AuthService from '../utils/AuthService'
 const Auth = new AuthService()
-
 
 Router.onRouteChangeStart = () => window.Pace.start()
 Router.onRouteChangeComplete = () => window.Pace.stop()
@@ -26,9 +25,9 @@ const Menu = [
     icon: 'fa fa-clipboard'
   },
   {
-    text: "Estoque",
-    href: "/estoque",
-    icon: "fa fa-archive"
+    text: 'Estoque',
+    href: '/estoque',
+    icon: 'fa fa-archive'
   },
   {
     text: 'Administração',
@@ -50,18 +49,34 @@ const Menu = [
 
 class Main extends Component {
   componentDidMount() {
-    // if (!Auth.loggedIn()) {
-    //   Router.push('/login')
-    // }
+    if (!Auth.loggedIn()) {
+      Router.push('/login')
+    }
   }
   render() {
+    if (!Auth.loggedIn()) {
+      return (
+        <span
+          className="fa-3x"
+          style={{
+            textAlign: 'center',
+            width: '100%',
+            transform: 'translate(0, -50%)',
+            top: '50%',
+            position: 'absolute'
+          }}
+        >
+          <i className="fa fa-cog fa-spin" />
+        </span>
+      )
+    }
     return (
       <div className="skin-black sidebar-mini wrapper">
         <Head />
         <Header auth={Auth} />
         <Sidebar menu={Menu} auth={Auth} />
         {this.props.children}
-        <Footer/>
+        <Footer />
       </div>
     )
   }

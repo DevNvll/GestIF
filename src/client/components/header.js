@@ -45,44 +45,13 @@ export default class Header extends Component {
           </a>
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
-            <Dropdown isOpen={this.state.dropdownOpen} tag="li" toggle={this.toggle} className="dropdown user user-menu">
-              
-              <DropdownToggle tag="a" href="#" className="dropdown-toggle">
-                  <img
-                    src="http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/e8/e805aec4d5c1c0cf7ceafbe714902428673f1e5d_full.jpg"
-                    className="user-image"
-                    alt="User Image"
-                  />
-                  <span className="hidden-xs">Henrick Mello</span>
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-menu">
-                
-                  <div className="user-header">
-                    <img
-                      src="http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/e8/e805aec4d5c1c0cf7ceafbe714902428673f1e5d_full.jpg"
-                      className="img-circle"
-                      alt="User Image"
-                    />
-                    <p>
-                      Henrick Mello
-                      <small>Monitor</small>
-                    </p>
-                  </div>
-                  <div className="user-footer">
-                    <div className="pull-right">
-                      <a
-                        href="#"
-                        onClick={() => auth.logout()}
-                        className="btn btn-default btn-flat"
-                      >
-                        Sair
-                      </a>
-                    </div>
-                  </div>
-                
-                </DropdownMenu>
-              
-              </Dropdown>
+            <li className="dropdown user user-menu">
+            <a className="dropdown-toggle" href="#" onClick={() => this.props.auth.logout()}>
+            <span className="hidden-xs">Sair</span>
+            </a>
+            
+            </li>
+            
             </ul>
           </div>
         </nav>

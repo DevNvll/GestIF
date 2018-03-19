@@ -4,32 +4,30 @@ const isBrowser = typeof window !== 'undefined';
 
 export default class AuthService {
   constructor(domain) {
-    this.domain = domain || 'http://localhost:5000'
+    this.domain = domain || ''
     this.fetch = this.fetch.bind(this)
     this.login = this.login.bind(this)
     this.getProfile = this.getProfile.bind(this)
     this.loggedIn = this.loggedIn.bind(this)
   }
 
-  login(username, password) {
-    return this.fetch(`${this.domain}/login`, {
+  login(email, password) {
+    return this.fetch(`${this.domain}/api/auth`, {
       method: 'POST',
       body: JSON.stringify({
-        username,
+        email,
         password
       })
     }).then(res => {
-      if (res.code === 'LOGIN_SUCCESS') {
-        this.setToken(res.result.access_token)
-        return this.fetch(`${this.domain}/api/user`, {
-          method: 'GET'
-        }).then(res => {
-          this.setProfile(res)
-          return Promise.resolve(res)
-        })
-      } else {
-        throw new Error(res.code)
-      }
+      return new Promise((resolve, reject) => {
+        if (res.code === 'LOGIN_SUCCESS') {
+          this.setToken(res.result.access_token)
+          this.setProfile(res.result.profile)
+          resolve()
+        } else {
+          reject(res.code)
+        }
+      })
     })
   }
 
