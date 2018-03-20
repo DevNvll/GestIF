@@ -6,8 +6,7 @@ import Sidebar from '../components/sidebar'
 import Footer from '../components/footer'
 import Router from 'next/router'
 
-import AuthService from '../utils/AuthService'
-const Auth = new AuthService()
+import Auth from '../utils/AuthService'
 
 Router.onRouteChangeStart = () => window.Pace.start()
 Router.onRouteChangeComplete = () => window.Pace.stop()

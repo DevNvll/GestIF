@@ -1,8 +1,8 @@
 import Router from 'next/router'
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined'
 
-export default class AuthService {
+class AuthService {
   constructor(domain) {
     this.domain = domain || ''
     this.fetch = this.fetch.bind(this)
@@ -76,7 +76,7 @@ export default class AuthService {
     }
 
     if (this.loggedIn()) {
-      headers['auth'] = this.getToken()
+      headers['Authorization'] = this.getToken()
     }
 
     return fetch(url, {
@@ -87,3 +87,5 @@ export default class AuthService {
       .then(response => response.json())
   }
 }
+
+export default new AuthService()

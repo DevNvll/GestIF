@@ -1,7 +1,6 @@
 {
   "name": "gestif",
   "scripts": {
-    "predev": "start mongod",
     "dev": "backpack dev",
     "build": "next build ./src/client && backpack build",
     "start": "NODE_ENV=production node build/main.js",

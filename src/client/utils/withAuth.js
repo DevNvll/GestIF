@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Router from 'next/router'
-import AuthService from './AuthService'
+import Auth from './AuthService'
 
 export default function withAuth(AuthComponent) {
-  const Auth = new AuthService()
   return class Authenticated extends Component {
     constructor(props) {
       super(props)
@@ -22,9 +21,11 @@ export default function withAuth(AuthComponent) {
     render() {
       return (
         <div>
-          {this.state.isLoading
-            ? <div>LOADING....</div>
-            : <AuthComponent auth={Auth} {...this.props} />}
+          {this.state.isLoading ? (
+            <div>LOADING....</div>
+          ) : (
+            <AuthComponent auth={Auth} {...this.props} />
+          )}
         </div>
       )
     }

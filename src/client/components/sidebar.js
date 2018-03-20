@@ -12,7 +12,6 @@ const MenuItem = props => {
       : false
     : null
   const onClick = () => {
-    console.log('clocked')
     window.Pace.start()
   }
   return props.submenu !== undefined ? (
@@ -29,10 +28,10 @@ const MenuItem = props => {
           return (
             <li key={i}>
               <Link prefetch href={item.href}>
-                  <a onClick={() => onClick()}>
-                    <i className={item.icon} />
-                    {item.text}
-                  </a>
+                <a onClick={() => onClick()}>
+                  <i className={item.icon} />
+                  {item.text}
+                </a>
               </Link>
             </li>
           )
@@ -42,10 +41,10 @@ const MenuItem = props => {
   ) : (
     <li className={isActive ? 'active treeview' : 'treeview'}>
       <Link prefetch href={props.href}>
-          <a>
-            <i className={props.icon} />
-            <span>{props.text}</span>
-          </a>
+        <a>
+          <i className={props.icon} />
+          <span>{props.text}</span>
+        </a>
       </Link>
     </li>
   )
@@ -57,7 +56,7 @@ const SideBar = ({ menu, auth, router, url }) => (
       <div className="user-panel">
         <div className="pull-left image">
           <img
-            src="http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/e8/e805aec4d5c1c0cf7ceafbe714902428673f1e5d_full.jpg"
+            src="https://i.imgur.com/j0eI5F1.jpg"
             className="img-circle"
             alt="User"
           />

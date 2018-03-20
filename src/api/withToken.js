@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 export default function withToken(req, res, next) {
-  let token = req.body.token || req.query.token || req.headers['Authorization']
+  let token = req.body.token || req.query.token || req.headers['authorization']
   if (token) {
     jwt.verify(token, req.app.get('secret'), (err, decoded) => {
       if (err) {
