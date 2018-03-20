@@ -1,234 +1,92 @@
-This project was bootstrapped with [Create Next App](https://github.com/segmentio/create-next-app).
+# GestIF
 
-Find the most recent version of this guide at [here](https://github.com/segmentio/create-next-app/blob/master/lib/templates/default/README.md). And check out [Next.js repo](https://github.com/zeit/next.js) for the most up-to-date info.
+**1. INTRODUÇÃO**
 
-## Table of Contents
-
-- [Questions? Feedback?](#questions-feedback)
-- [Folder Structure](#folder-structure)
-- [Available Scripts](#available-scripts)
-  - [npm run dev](#npm-run-dev)
-  - [npm run build](#npm-run-build)
-  - [npm run start](#npm-run-start)
-- [Using CSS](#using-css)
-- [Adding Components](#adding-components)
-- [Fetching Data](#fetching-data)
-- [Custom Server](#custom-server)
-- [Syntax Highlighting](#syntax-highlighting)
-- [Using the `static` Folder](#using-the-static-folder)
-- [Deploy to Now](#deploy-to-now)
-- [Something Missing?](#something-missing)
+Observando as atividades cotidianas do _Campus_ Arraial do Cabo, percebemos em muitos momentos a falta de ligação entre os setores administrativos com o restante do instituto, resultando em problemas de comunicação e impedindo que diversas atividades sejam realizadas de forma dinâmica e eficiente, prejudicando ainda a produtividade dos servidores em suas tarefas, atingindo assim a todos que precisam utilizar dos recursos que o _campus_ disponibiliza.
 
-## Questions? Feedback?
+Além disso, percebemos que a utilização de sistemas não automatizados são, em muitos momentos, ineficazes e pouco econômicos. Percebemos, ainda, que o uso de sistemas automatizados, em detrimento aos manuais (planilhas a mão, notas, cadernos) aumentam a produtividade e consequentemente a rapidez dos processos administrativos. Visto isso, é de suma importância o desenvolvimento de um software capaz de realizar o gerenciamento administrativo do instituto.
 
-Check out [Next.js FAQ & docs](https://github.com/zeit/next.js#faq) or [let us know](https://github.com/segmentio/create-next-app/issues) your feedback.
+O projeto pretende, então, solucionar os problemas existentes de gestão do _Campus_, por meio da criação de um software de gestão, onde funcionará como um agregador, que possuirá vários módulos independentes, cada um para uma resolução de problemas específica. Com isso, facilitaremos o trabalho das partes competentes do _campus_, além de aumentar a integração entre servidores e discentes, peças fundamentais para o funcionamento da instituição.
 
-## Folder Structure
+O sistema comportará diversas funções. Destacam-se entre elas o controle de entrada e saída dos equipamentos dos laboratórios, quadro de horários de monitores, gerenciamento do almoxarifado, entre outros. Para exemplificarmos a funcionalidade do nosso sistema, optamos por criar o controle de equipamentos dos laboratórios, abrindo possibilidade para aperfeiçoamento e futura expansão.
 
-After creating an app, it should look something like:
+**2. JUSTIFICATIVA DO PROJETO**
 
-```
-my-app/
-  README.md
-  package.json
-  next.config.js
-  components/
-    head.js
-    nav.js
-  pages/
-    index.js
-  static/
-    favicon.ico
-```
+Primeiramente, é necessário contextualizar acerca da definição de gestão. Gestão significa gerenciamento, administração, onde existe uma instituição, uma empresa ou uma entidade social de pessoas a ser gerida ou administrada. Sabendo-se disso, devemos ainda saber o conceito e o papel da gestão no âmbito educacional: Gestão escolar é um sistema de organização interno da escola, envolvendo todos os setores que estão relacionados com as práticas escolares. Desta forma, a gestão escolar busca garantir um desenvolvimento socioeducacional eficaz na instituição de ensino.
 
-Routing in Next.js is based on the file system, so `./pages/index.js` maps to the `/` route and
-`./pages/about.js` would map to `/about`.
+ A gestão escolar é constituída por quatro pilares principais, que são: gestão pedagógica, gestão administrativa, gestão financeira e gestão de recursos humanos. Nosso projeto abrangerá dois desses pilares: gestão administrativa e gestão de recursos humanos. Inicialmente, o sistema contará com um ambiente para controle de estoque, o qual está relacionado à gestão administrativa do _campus_. Porém, devido ao fato do sistema de gestão que será produzido ser expansível, poderá, no futuro, abranger o âmbito de gestão de recursos humanos, como por exemplo, o controle de horários dos monitores e o agendamento de salas.
 
-The `./static` directory maps to `/static` in the `next` server, so you can put all your
-other static resources like images or compiled CSS in there.
+O _Campus_ Arraial do Cabo, sendo uma instituição de tecnologia e ensino, precisa fundamentalmente de um sistema automatizado para controle de gestão. A não existência de um sistema como este demonstra uma deficiência que nosso instituto sofre na sua essência. Por conta disso, acreditamos ser mais que necessário a implementação de um sistema como este que será produzido.
 
-Out of the box, we get:
+**3. OBJETIVO(S)**
 
-- Automatic transpilation and bundling (with webpack and babel)
-- Hot code reloading
-- Server rendering and indexing of `./pages`
-- Static file serving. `./static/` is mapped to `/static/`
+3.1. Objetivo Geral do Trabalho
 
-Read more about [Next's Routing](https://github.com/zeit/next.js#routing)
+Impulsionar o desenvolvimento de outros sistemas inteligentes capazes de sanar os problemas manuais presentes nas diversas áreas da escola, além do fluxo de materiais dos laboratórios.
 
-## Available Scripts
+Proporcionar ao _campus_ maior integração no que tange a gestão do mesmo.
 
-In the project directory, you can run:
+3.2 **.** Objetivos Específicos
 
-### `npm run dev`
+Verificar os principais problemas administrativos do _campus_. Através de um software capaz de agilizar o processo administrativo local, fica fácil verificar onde está ocorrendo a maior falha no que tange à gestão ou em qual área o processo demora mais para ser executado.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Propor uma solução informatizada para esses problemas. Utilizando um sistema informatizado, muitos dos recursos físicos serão poupados neste processo, ocasionando uma redução de gastos no _campus_. Por exemplo, a quantidade de folhas utilizadas como fichas para relatar problemas nos laboratórios poderão ser utilizadas para imprimir materiais para os alunos.
 
-The page will reload if you make edits.<br>
-You will also see any errors in the console.
+Criar uma plataforma web capaz de facilitar a resolução desses problemas, permitindo um acesso simples e portátil para os membros da administração do _campus_.
 
-### `npm run build`
+Exemplificar através do controle de entrada e saída dos equipamentos dos laboratórios.
 
-Builds the app for production to the `.next` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Aplicar essa plataforma no _campus_ ainda no ano de lançamento.
 
-### `npm run start`
+**4. METODOLOGIA**
 
-Starts the application in production mode.
-The application should be compiled with \`next build\` first.
+O primeiro passo será um levantamento de requisitos, para que possamos saber e analisar quais são os principais pontos que apresentam problemas de gestão no nosso _campus_. Com isso, conseguiremos direcionar o desenvolvimento da nossa aplicação para que possa atender e solucionar de forma mais precisa os pontos do levantamento.  Após essa etapa, e já com as bases definidas, começaremos o desenvolvimento.
 
-See the section in Next docs about [deployment](https://github.com/zeit/next.js/wiki/Deployment) for more information.
+O software será desenvolvido na web, possibilitando a integração entre diversos sistemas operacionais, facilitando assim o acesso de todos ao sistema.
 
-## Using CSS
+As principais tecnologias usadas no desenvolvimento do sistema são as seguintes:
 
-[`styled-jsx`](https://github.com/zeit/styled-jsx) is bundled with next to provide support for isolated scoped CSS. The aim is to support "shadow CSS" resembling of Web Components, which unfortunately [do not support server-rendering and are JS-only](https://github.com/w3c/webcomponents/issues/71).
+JavaScript. Foi escolhido por ser uma linguagem simples de se utilizar e que ao mesmo tempo permite o desenvolvimento de aplicações complexas e de alto desempenho. Por ser a linguagem mais popular atualmente, está à nossa disposição uma gama de ferramentas de desenvolvimento de código aberto que nos permite facilmente desenvolver um aplicativo com as tecnologias mais modernas com uma grande facilidade.  Além disso, o uso da mesma linguagem no _back-end_ e no _front-end_ nos garante uma facilidade de manutenção e documentação do código_._
 
-```jsx
-export default () => (
-  <div>
-    Hello world
-    <p>scoped!</p>
-    <style jsx>{`
-      p {
-        color: blue;
-      }
-      div {
-        background: red;
-      }
-      @media (max-width: 600px) {
-        div {
-          background: blue;
-        }
-      }
-    `}</style>
-  </div>
-)
-```
+O Bootstrap será a framework CSS escolhida para o projeto. Com ele será possível acelerar o desenvolvimento dos elementos gráficos do site, por exemplo, menus, tabelas, formulários, etc.
 
-Read more about [Next's CSS features](https://github.com/zeit/next.js#css).
+O NodeJS será a plataforma base do projeto. O mesmo nos permite executar o JavaScript no servidor e assim administrar as dependências do projeto, renderizar as páginas web e processar requisições que irão acessar ou modificar o banco de dados.
 
-## Adding Components
+Express.js. Foi a framework escolhida para o processamento de requisições HTTP ao servidor, isto é, as requisições que farão a consulta e a modificação de dados no banco.
 
-We recommend keeping React components in `./components` and they should look like:
+React.js. Foi a _framework_ web escolhida para o desenvolvimento da interface gráfica do GestIF. Criada pelo time do Instagram e mantida e utilizada pelo Facebook, o React é uma _framework_ muito popular - a segunda mais popular - e madura. React nos permite trabalhar com _web components_, ou seja, o encapsulamento de componentes da aplicação permitindo sua reutilização.  Além disso, o React é uma framework declarativa, ou seja, não precisamos nos preocupar quanto a transição da interface para se adequar a novos dados, apenas mude os dados e o React automaticamente lida com o processo de atualizar e renderizar a interface.
 
-### `./components/simple.js`
+Next.js é uma ferramenta que nos permite trabalhar com React com o mínimo de esforço. O Next também gerencia a renderização da aplicação no lado do servidor, ou seja, todo o processamento dos componentes do React ocorre no servidor e navegador do usuário recebe o HTML já renderizado. Isso garante uma aplicação mais leve e consequentemente uma experiência de navegação mais fluida. Ademais, Next nos provê um sistema de roteamento de páginas moderno e com _code-splitting_ - técnica que divide os códigos de cada página e eles só são carregados quando a página é requisitada.
 
-```jsx
-const Simple = () => (
-  <div>Simple Component</div>
-)
+GitHub é a plataforma que será utilizada para o controle de versão que facilitará o trabalho em grupo.
 
-export default Simple // don't forget to export default!
-```
+**5. RELAÇÃO ENSINO-PESQUISA-EXTENSÃO**
 
-### `./components/complex.js`
+ O projeto desempenhará, em relação ao ensino, papel fundamental de apoio às atividades realizadas no instituto, contribuindo para o bom funcionamento dos afazeres acadêmicos, fazendo com que tanto a relação entre servidores e discentes seja aprimorada quanto o andamento cotidiano das aulas e atividades extracurriculares da instituição.
 
-```jsx
-import { Component } from 'react'
+Ademais, mostrou-se de extrema importância os conhecimentos adquiridos durante a trajetória acadêmica no IFRJ para a realização desse projeto.
 
-class Complex extends Component {
-  state = {
-    text: 'World'
-  }
+A própria realização deste projeto visa aprimorar as habilidades e competências relativas à pesquisa, já que com este temos o contato inicial com o método científico.
 
-  render () {
-    const { text } = this.state
-    return <div>Hello {text}</div>
-  }
-}
+ A respeito da extensão, não foi encontrado nada substancial relativo ao projeto.
 
-export default Complex // don't forget to export default!
-```
+**6****. REFERÊNCIAS**
 
-## Fetching Data
+Node.js. A JavaScript runtime built on Chrome&#39;s V8 JavaScript engine. [https://nodejs.org/en/](https://nodejs.org/en/) Acessado em 15 de março de 2018.
 
-You can fetch data in `pages` components using `getInitialProps` like this:
+React.js. A JavaScript library for building user interfaces. [https://reactjs.org/](https://reactjs.org/) Acessado em 15 de março de 2018.
 
-### `./pages/stars.js`
+Express.js. Node.js web application framework. [http://expressjs.com/](http://expressjs.com/) Acessado em 15 de março de 2018.
 
-```jsx
-const Page = (props) => <div>Next stars: {props.stars}</div>
+Next.js. Framework for server-rendered or statically-exported React apps. [https://github.com/zeit/next.js/](https://github.com/zeit/next.js/) Acessado em 15 de março de 2018.
 
-Page.getInitialProps = async ({ req }) => {
-  const res = await fetch('https://api.github.com/repos/zeit/next.js')
-  const json = await res.json()
-  const stars = json.stargazers_count
-  return { stars }
-}
+HTML. HTML is the standard markup language used to create web pages and its elements form the building blocks of all websites. [https://www.w3.org/html/](https://www.w3.org/html/) Acessado em 15 de março de 2018.
 
-export default Page
-```
+CSS. Casting Style Sheets. [https:/](https://www.w3.org/Style/CSS/) [www.w3.org/Style/CSS/](http://www.w3.org/Style/CSS/) Acessado em 15 de março de 2018.
 
-For the initial page load, `getInitialProps` will execute on the server only. `getInitialProps` will only be executed on the client when navigating to a different route via the `Link` component or using the routing APIs.
+JavaScript. JavaScript is the programming language of HTML and the Web. [https://www.w3schools.com/js/](https://www.w3schools.com/js/) Acessado em 15 de março de 2018.
 
-_Note: `getInitialProps` can **not** be used in children components. Only in `pages`._
+Bootstrap. The world&#39;s most popular framework for building responsive, mobile-first sites. [https://getbootstrap.com/docs/4.0/getting-started/introduction/](https://getbootstrap.com/docs/4.0/getting-started/introduction/) Acessado em 15 de março de 2018.
 
-Read more about [fetching data and the component lifecycle](https://github.com/zeit/next.js#fetching-data-and-component-lifecycle)
+MongoDB. What is MongoDB?. [https://www.mongodb.com/what-is-mongodb](https://www.mongodb.com/what-is-mongodb) Acessado em 15 de março de 2018.
 
-## Custom Server
-
-Want to start a new app with a custom server? Run `create-next-app --example customer-server custom-app`
-
-Typically you start your next server with `next start`. It's possible, however, to start a server 100% programmatically in order to customize routes, use route patterns, etc
-
-This example makes `/a` resolve to `./pages/b`, and `/b` resolve to `./pages/a`:
-
-```jsx
-const { createServer } = require('http')
-const { parse } = require('url')
-const next = require('next')
-
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
-
-app.prepare().then(() => {
-  createServer((req, res) => {
-    // Be sure to pass `true` as the second argument to `url.parse`.
-    // This tells it to parse the query portion of the URL.
-    const parsedUrl = parse(req.url, true)
-    const { pathname, query } = parsedUrl
-
-    if (pathname === '/a') {
-      app.render(req, res, '/b', query)
-    } else if (pathname === '/b') {
-      app.render(req, res, '/a', query)
-    } else {
-      handle(req, res, parsedUrl)
-    }
-  })
-  .listen(3000, (err) => {
-    if (err) throw err
-    console.log('> Ready on http://localhost:3000')
-  })
-})
-```
-
-Then, change your `start` script to `NODE_ENV=production node server.js`.
-
-Read more about [custom server and routing](https://github.com/zeit/next.js#custom-server-and-routing)
-
-## Syntax Highlighting
-
-To configure the syntax highlighting in your favorite text editor, head to the [relevant Babel documentation page](https://babeljs.io/docs/editors) and follow the instructions. Some of the most popular editors are covered.
-
-## Deploy to Now
-
-[now](https://zeit.co/now) offers a zero-configuration single-command deployment.
-
-1. Install the `now` command-line tool either via the recommended [desktop tool](https://zeit.co/download) or via node with `npm install -g now`.
-
-2. Run `now` from your project directory. You will see a **now.sh** URL in your output like this:
-
-    ```
-    > Ready! https://your-project-dirname-tpspyhtdtk.now.sh (copied to clipboard)
-    ```
-
-    Paste that URL into your browser when the build is complete, and you will see your deployed app.
-
-You can find more details about [`now` here](https://zeit.co/now).
-
-## Something Missing?
-
-If you have ideas for how we could improve this readme or the project in general, [let us know](https://github.com/segmentio/create-next-app/issues) or [contribute some!](https://github.com/segmentio/create-next-app/edit/master/lib/templates/default/README.md)
