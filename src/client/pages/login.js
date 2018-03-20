@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import Head from '../components/head'
 import Router from 'next/router'
 
-import AuthService from '../utils/AuthService'
-const auth = new AuthService()
+import auth from '../utils/AuthService'
 
 export default class Login extends Component {
   state = {}
@@ -39,11 +38,13 @@ export default class Login extends Component {
             </a>
           </div>
           <div className="login-box-body">
-            {this.state.error
-              ? <center>
-                  <p className="text-red">Credenciais Inválidas</p>
-                </center>
-              : <div />}
+            {this.state.error ? (
+              <center>
+                <p className="text-red">Credenciais Inválidas</p>
+              </center>
+            ) : (
+              <div />
+            )}
             <form onSubmit={this.onSubmit.bind(this)}>
               <div className="form-group has-feedback">
                 <input
