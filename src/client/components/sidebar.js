@@ -1,6 +1,7 @@
 import { Component, Fragment } from 'react'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+import { Icon, Popup } from 'semantic-ui-react'
 
 const MenuItem = props => {
   const isActive = props.router.pathname === props.href
@@ -50,45 +51,57 @@ const MenuItem = props => {
   )
 }
 
-const SideBar = ({ menu, auth, router, url }) => (
+const SideBar = ({ menu, auth, router, url, module }) => (
   <aside className="main-sidebar">
     <section className="sidebar">
       <div className="user-panel">
         <div className="pull-left image">
           <img
-            src="https://i.imgur.com/j0eI5F1.jpg"
+            src="https://i.imgur.com/v718WwC.png"
             className="img-circle"
             alt="User"
           />
         </div>
         <div className="pull-left info">
-          <p>{auth.getProfile().name}</p>
-          <a href="/">
-            <i className="fa fa-circle text-success" /> Sala 213
-          </a>
+          <p>
+            {auth.getProfile().name.split(' ')[0]}{' '}
+            {
+              auth.getProfile().name.split(' ')[
+                auth.getProfile().name.split(' ').length - 1
+              ]
+            }{' '}
+            <Popup
+              inverted
+              position="right center"
+              trigger={
+                <span>
+                  <Link href="/me">
+                    <a alt="Configurações da conta">
+                      <Icon name="setting" size="small" />
+                    </a>
+                  </Link>
+                </span>
+              }
+            >
+              Detalhes da conta
+            </Popup>
+          </p>
+          <Popup
+            inverted
+            position="right center"
+            trigger={
+              <span>
+                <a href="/modulos">
+                  <Icon name="cube" size="small" />
+                  <span style={{ paddingTop: '5px' }}>{module.name}</span>
+                </a>
+              </span>
+            }
+          >
+            Alternar módulo
+          </Popup>
         </div>
       </div>
-
-      <form action="/" method="get" className="sidebar-form">
-        <div className="input-group">
-          <input
-            type="text"
-            name="q"
-            className="form-control"
-            placeholder="Pesquisar itens..."
-          />
-          <span className="input-group-btn">
-            <button
-              type="submit"
-              name="search"
-              id="search-btn"
-              className="btn btn-flat"
-            >
-              <i className="fa fa-search" />
-            </button>
-          </span>
-        </div>
-      </form>
 
       <ul className="sidebar-menu" data-widget="tree">
         <li className="header">NAVEGAÇÃO</li>

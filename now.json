@@ -1,0 +1,4 @@
+{
+  "alias": "gestif.now.sh",
+  "dotenv": ".env.production"
+}

@@ -22,7 +22,11 @@ const reportsSchema = new Schema({
     type: Number,
     required: true
   },
-  data: { type: Date, default: Date.now }
+  resolvidoPor: {
+    type: String
+  },
+  data: { type: Date, default: Date.now },
+  dataResolvido: { type: Date }
 })
 
 export default mongoose.model('Reports', reportsSchema)

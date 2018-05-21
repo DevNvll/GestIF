@@ -6,12 +6,12 @@ import bodyParser from 'body-parser'
 import routes from './client/routes'
 import api from './api'
 
-import User from './models/Users'
+import dotenv from 'dotenv'
+dotenv.config()
 
 mongoose.Promise = global.Promise
-mongoose.connect(
-  'mongodb://devnvll:99442047@ds119129.mlab.com:19129/gestif',
-  err => console.log('> Conectado ao MongoDB')
+mongoose.connect(process.env.MONGO_URL, err =>
+  console.log('> Conectado ao MongoDB')
 )
 
 const port = parseInt(process.env.PORT, 10) || 3000
@@ -22,14 +22,6 @@ const handler = app.getRequestHandler()
 
 app.prepare().then(() => {
   const server = express()
-
-  // api.get('/users', (req, res) => {
-  //   User.find()
-  //     .select('-password')
-  //     .then(users => {
-  //       res.send(users)
-  //     })
-  // })
 
   server.set('secret', '#códigoSuperSecr3to@')
   server.use(bodyParser.urlencoded({ extended: false }))

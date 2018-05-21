@@ -4,7 +4,7 @@ export default () => (
       <b>Versão</b> 1.0.0
     </div>
     <strong>
-      GestIF &copy; 2014-2016 <a href="https://adminlte.io">IFRJ</a>.
+      GestIF &copy; 2018 <a href="https://adminlte.io">IFRJ</a>.
     </strong>
   </footer>
 )

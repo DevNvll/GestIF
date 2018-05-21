@@ -1,25 +1,19 @@
 import React, { Component } from 'react'
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap'
 
 export default class Header extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this)
     this.state = {
       dropdownOpen: false
-    };
+    }
   }
 
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
-    });
+    })
   }
   render() {
     const auth = this.props
@@ -29,7 +23,15 @@ export default class Header extends Component {
           <span className="logo-mini">
             <b>G</b>IF
           </span>
-          <span className="logo-lg">
+          <span
+            style={{
+              fontSize: '20px !important',
+              lineHeight: '50px !important',
+              textAlign: 'center !important',
+              fontFamily: 'Helvetica Neue,Arial,sans-serif !important',
+              fontWeight: '300 !important'
+            }}
+          >
             <b>Gest</b>IF
           </span>
         </a>
@@ -45,13 +47,15 @@ export default class Header extends Component {
           </a>
           <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
-            <li className="dropdown user user-menu">
-            <a className="dropdown-toggle" href="#" onClick={() => this.props.auth.logout()}>
-            <span className="hidden-xs">Sair</span>
-            </a>
-            
-            </li>
-            
+              <li className="dropdown user user-menu">
+                <a
+                  className="dropdown-toggle"
+                  href="#"
+                  onClick={() => this.props.auth.logout()}
+                >
+                  <span className="hidden-xs">Sair</span>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>

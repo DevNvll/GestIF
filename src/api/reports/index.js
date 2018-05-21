@@ -5,8 +5,28 @@ import Report from '../../models/Reports'
 const router = Router()
 
 router.get('/', (req, res) => {
-  Report.find({ status: 0 }).then(reports => {
+  Report.find({}).then(reports => {
     res.send(reports)
+  })
+})
+
+router.get('/stats', (req, res) => {
+  Report.find({}).then(reports => {
+    const UmaSemana = new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+    const numPendentes = reports.filter(r => r.status === 0).length
+    const numTotal = reports.length
+    const numResolvidoPor = reports.filter(
+      r => r.resolvidoPor === req.decoded.id
+    ).length
+    const maisDeUmaSemana = reports.filter(
+      r => r.status === 0 && new Date(r.data).getTime() < UmaSemana
+    ).length
+    res.send({
+      numPendentes,
+      numTotal,
+      numResolvidoPor,
+      maisDeUmaSemana
+    })
   })
 })
 
@@ -58,7 +78,16 @@ router.post('/resolve', (req, res) => {
       result: {}
     })
   } else {
-    Report.update({ _id: id }, { $set: { status: 1 } })
+    Report.update(
+      { _id: id },
+      {
+        $set: {
+          status: 1,
+          dataResolvido: Date.now(),
+          resolvidoPor: req.decoded.id
+        }
+      }
+    )
       .then(report => {
         res.send({ status: 'SUCCESS' })
       })

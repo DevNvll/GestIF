@@ -7,6 +7,7 @@ import Footer from '../components/footer'
 import Router from 'next/router'
 
 import Auth from '../utils/AuthService'
+import * as ModuleService from '../utils/ModulesService'
 
 Router.onRouteChangeStart = () => window.Pace.start()
 Router.onRouteChangeComplete = () => window.Pace.stop()
@@ -22,11 +23,6 @@ const Menu = [
     text: 'Reports',
     href: '/reports',
     icon: 'fa fa-clipboard'
-  },
-  {
-    text: 'Estoque',
-    href: '/estoque',
-    icon: 'fa fa-archive'
   },
   {
     text: 'Administração',
@@ -73,9 +69,17 @@ class Main extends Component {
       <div className="skin-black sidebar-mini wrapper">
         <Head />
         <Header auth={Auth} />
-        <Sidebar menu={Menu} auth={Auth} />
+        <Sidebar menu={Menu} auth={Auth} module={ModuleService.getModule()} />
         {this.props.children}
         <Footer />
+        <style jsx global>
+          {`
+            body {
+              font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial,
+                sans-serif;
+            }
+          `}
+        </style>
       </div>
     )
   }

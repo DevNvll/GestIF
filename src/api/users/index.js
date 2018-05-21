@@ -4,14 +4,62 @@ import User from '../../models/Users'
 
 const router = Router()
 
+//lista todos os usuários da rota 'api/users/'
 router.get('/', (req, res) => {
   User.find({}).then(users => {
     res.send(users)
   })
 })
 
-router.post('/create', (req, res) => {
-  const { name, email, password } = req.body
+//Atualiza os dados de um usuário na rota 'api/users/'
+router.patch('/', (req, res) => {
+  User.update(
+    { _id: req.decoded.id },
+    {
+      $set: req.body
+    }
+  ).then(user => {
+    res.send(user)
+  })
+})
+
+//Lista os dados do usuário relativo ao token. Rota 'api/users/me'
+router.get('/me', (req, res) => {
+  User.findOne({ _id: req.decoded.id }).then(user => {
+    res.send(user)
+  })
+})
+
+//Atualiza os dados do usuário relativo ao token. Rota 'api/users/me'
+router.patch('/me', (req, res) => {
+  console.log(req.body, req.decoded)
+  if (req.body.password) {
+    bcrypt.hash(req.body.password, 10).then(hash => {
+      const { password, ...objSemSenha } = req.body
+      User.update(
+        { _id: req.decoded.id },
+        {
+          $set: { ...objSemSenha, password: hash }
+        }
+      ).then(user => {
+        res.send(user)
+      })
+    })
+  } else {
+    User.update(
+      { _id: req.decoded.id },
+      {
+        $set: req.body
+      }
+    ).then(user => {
+      res.send(user)
+    })
+  }
+})
+
+//Cria um usuário.  Rota 'api/users/'
+router.post('/', (req, res) => {
+  const { name, email, password, setor } = req.body
   if (!name) {
     res.status(400).json({
       code: 'MISSING_FIELD_NAME',
@@ -29,7 +77,7 @@ router.post('/create', (req, res) => {
     })
   } else {
     bcrypt.hash(password, 10).then(hash => {
-      const newUser = new User({ name, email, password: hash })
+      const newUser = new User({ name, email, setor, password: hash })
       User.findOne({ email }).then(result => {
         if (!result) {
           newUser.save().then(user => {
@@ -37,6 +85,7 @@ router.post('/create', (req, res) => {
               id: user._id,
               name: user.name,
               email: user.email,
+              setor: user.setor,
               join_date: user.joined
             })
           })
@@ -49,6 +98,17 @@ router.post('/create', (req, res) => {
       })
     })
   }
+})
+
+router.delete('/', (req, res) => {
+  const { id, name } = req.body
+  User.deleteOne({ _id: id })
+    .then(result => {
+      res.send(result)
+    })
+    .catch(err => {
+      res.send(err)
+    })
 })
 
 export default router
