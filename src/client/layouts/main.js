@@ -50,8 +50,7 @@ class Main extends Component {
       Router.push('/login')
     }
     //Se um módulo não foi escolhido, redireciona para tela de seleção de módulo. Ocorre a cada login.
-    console.log(ModuleService.isModuleChosen())
-    if (!ModuleService.isModuleChosen()) {
+    if (!ModuleService.isModuleChosen() && Auth.loggedIn()) {
       Router.push('/modulos')
     }
   }
