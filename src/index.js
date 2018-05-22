@@ -3,7 +3,6 @@ import next from 'next'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 
-import routes from './client/routes'
 import api from './api'
 
 import dotenv from 'dotenv'
@@ -27,8 +26,9 @@ app.prepare().then(() => {
   server.use(bodyParser.urlencoded({ extended: false }))
   server.use(bodyParser.json())
 
+  //registra rota padrão da API. Não mexer.
   server.use('/api', api)
-
+  //registra rota padrão do app. Não mexer.
   server.get('*', handler)
 
   server.listen(port, err => {

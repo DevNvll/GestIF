@@ -12,6 +12,8 @@ Router.onRouteChangeStart = () => window.Pace.start()
 Router.onRouteChangeComplete = () => window.Pace.stop()
 Router.onRouteChangeError = () => window.Pace.stop()
 
+//Menu do módulo da CSTI
+//TODO: Adicionar menu do módulo da direção
 const Menu = [
   {
     text: 'Início',
@@ -43,9 +45,11 @@ const Menu = [
 
 class Main extends Component {
   componentDidMount() {
+    //Se não estiver autenticado, redireciona para a tela de login
     if (!Auth.loggedIn()) {
       Router.push('/login')
     }
+    //Se um módulo não foi escolhido, redireciona para tela de seleção de módulo. Ocorre a cada login.
     console.log(ModuleService.isModuleChosen())
     if (!ModuleService.isModuleChosen()) {
       Router.push('/modulos')
@@ -70,10 +74,15 @@ class Main extends Component {
     }
     return (
       <div className="skin-black sidebar-mini wrapper">
+        {/* Cabeçalho branco */}
         <Head />
+        {/* Cabeçalho */}
         <Header auth={Auth} />
+        {/* Barra lateral */}
         <Sidebar menu={Menu} auth={Auth} module={ModuleService.getModule()} />
+        {/* Página de /pages/ */}
         {this.props.children}
+        {/* Rodapé */}
         <Footer />
         <style jsx global>
           {`

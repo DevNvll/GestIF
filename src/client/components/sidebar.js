@@ -1,7 +1,7 @@
-import { Component, Fragment } from 'react'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { Icon, Popup } from 'semantic-ui-react'
+import Avatar from 'react-avatar'
 
 const MenuItem = props => {
   const isActive = props.router.pathname === props.href
@@ -57,7 +57,9 @@ const SideBar = ({ menu, auth, router, url, module }) => (
       <div className="user-panel">
         <div className="pull-left image">
           <img
-            src="https://i.imgur.com/v718WwC.png"
+            src={`https://ui-avatars.com/api/?background=222&color=fff&name=${
+              auth.getProfile().name
+            }&font-size=0.33`}
             className="img-circle"
             alt="User"
           />
