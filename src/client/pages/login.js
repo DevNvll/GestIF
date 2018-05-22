@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Head from '../components/head'
 import Router from 'next/router'
 
+import { Segment, Form, Button, Message } from 'semantic-ui-react'
+
 import auth from '../utils/AuthService'
 
 export default class Login extends Component {
@@ -32,51 +34,37 @@ export default class Login extends Component {
       <div className="hold-transition login-page">
         <Head title="Login | GestIF" />
         <div className="login-box">
-          <div className="login-logo">
+          <div className="login-logo" style={{ fontFamily: 'Open Sans' }}>
             <a href="#">
               <b>Gest</b>IF
             </a>
           </div>
-          <div className="login-box-body">
-            {this.state.error ? (
-              <center>
-                <p className="text-red">Credenciais Inválidas</p>
-              </center>
-            ) : (
-              <div />
-            )}
-            <form onSubmit={this.onSubmit.bind(this)}>
-              <div className="form-group has-feedback">
+          <Segment stacked>
+            <Form onSubmit={this.onSubmit.bind(this)}>
+              {this.state.error ? (
+                <center style={{ paddingBottom: '10px' }}>
+                  <Message negative>Credenciais Inválidas</Message>
+                </center>
+              ) : (
+                <div />
+              )}
+              <Form.Field>
+                <input icon="mail" placeholder="Email" name="email" required />
+              </Form.Field>
+              <Form.Field>
                 <input
-                  type="text"
-                  name="email"
-                  className="form-control"
-                  placeholder="E-mail"
-                />
-                <span className="fa fa-envelope form-control-feedback" />
-              </div>
-              <div className="form-group has-feedback">
-                <input
+                  icon="lock"
                   type="password"
-                  name="password"
-                  className="form-control"
                   placeholder="Senha"
+                  name="password"
+                  required
                 />
-                <span className="fa fa-lock form-control-feedback" />
-              </div>
-              <div className="row">
-                <div className="col-xs-8" />
-                <div className="col-xs-4">
-                  <button
-                    type="submit"
-                    className="btn btn-success btn-block btn-flat"
-                  >
-                    Logar
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+              </Form.Field>
+              <Button secondary fluid type="submit">
+                Logar
+              </Button>
+            </Form>
+          </Segment>
         </div>
       </div>
     )
