@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Link from 'next/link'
 import Head from '../components/head'
 import Header from '../components/header'
 import Sidebar from '../components/sidebar'
@@ -46,6 +45,10 @@ class Main extends Component {
   componentDidMount() {
     if (!Auth.loggedIn()) {
       Router.push('/login')
+    }
+    console.log(ModuleService.isModuleChosen())
+    if (!ModuleService.isModuleChosen()) {
+      Router.push('/modulos')
     }
   }
   render() {

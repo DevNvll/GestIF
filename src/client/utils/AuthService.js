@@ -57,6 +57,7 @@ class AuthService {
     Router.push('/login')
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
+    localStorage.removeItem('module')
   }
 
   _checkStatus(response) {

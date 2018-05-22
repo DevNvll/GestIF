@@ -14,7 +14,6 @@ class Home extends Component {
   componentDidMount() {
     Auth.fetch('/api/reports/stats').then(data => {
       this.setState({ stats: data })
-      console.log(data)
     })
   }
   render() {
