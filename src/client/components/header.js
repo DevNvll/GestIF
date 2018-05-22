@@ -20,18 +20,10 @@ export default class Header extends Component {
     return (
       <header className="main-header">
         <a href="/" className="logo">
-          <span className="logo-mini">
+          <span className="logo-mini" style={{ fontFamily: 'Open Sans' }}>
             <b>G</b>IF
           </span>
-          <span
-            style={{
-              fontSize: '20px !important',
-              lineHeight: '50px !important',
-              textAlign: 'center !important',
-              fontFamily: 'Helvetica Neue,Arial,sans-serif !important',
-              fontWeight: '300 !important'
-            }}
-          >
+          <span style={{ fontFamily: 'Open Sans' }}>
             <b>Gest</b>IF
           </span>
         </a>
