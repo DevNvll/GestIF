@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { Icon, Popup } from 'semantic-ui-react'
-import Avatar from 'react-avatar'
 
 const MenuItem = props => {
   const isActive = props.router.pathname === props.href
