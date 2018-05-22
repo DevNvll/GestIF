@@ -35,9 +35,9 @@ const Menu = [
         icon: 'fa fa-id-card'
       },
       {
-        text: 'Sistema',
-        href: '/config2',
-        icon: 'fa fa-wrench'
+        text: 'Sobre',
+        href: '/sobre',
+        icon: 'fa fa-info'
       }
     ]
   }
