@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import Users from '../models/Users'
+import Users from '../../models/Users'
 
 export default async function withToken(req, res, next) {
   let token = req.body.token || req.query.token || req.headers['authorization']
