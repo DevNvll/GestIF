@@ -9,12 +9,11 @@ Validação do módulo de Reports:
 Só retorna algum resultado das rotas se tiver a role csti no perfil do usuário.
 */
 router.use((req, res, next) => {
-  if (req.user.roles.includes('cstis')) {
+  if (req.user.roles.includes('csti')) {
     next()
   } else {
     res.status(401).json({
       error: true,
-      status: 'ERROR',
       code: 'NO_ROLE',
       result: {}
     })
@@ -106,7 +105,7 @@ router.post('/resolve', (req, res) => {
       }
     )
       .then(report => {
-        res.send({ status: 'SUCCESS' })
+        res.json({ status: 'SUCCESS', result: report })
       })
       .catch(err => {
         res.send({ status: 'ERROR' })
