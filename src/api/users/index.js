@@ -15,7 +15,7 @@ router.get('/', hasRole('csti'), (req, res) => {
 //Atualiza os dados de um usuário na rota 'api/users/'
 router.patch('/', (req, res) => {
   User.update(
-    { _id: req.decoded.id },
+    { _id: req.user.id },
     {
       $set: req.body
     }
@@ -26,19 +26,18 @@ router.patch('/', (req, res) => {
 
 //Lista os dados do usuário relativo ao token. Rota 'api/users/me'
 router.get('/me', (req, res) => {
-  User.findOne({ _id: req.decoded.id }).then(user => {
+  User.findOne({ _id: req.user.id }).then(user => {
     res.send(user)
   })
 })
 
 //Atualiza os dados do usuário relativo ao token. Rota 'api/users/me'
 router.patch('/me', (req, res) => {
-  console.log(req.body, req.decoded)
   if (req.body.password) {
     bcrypt.hash(req.body.password, 10).then(hash => {
       const { password, ...objSemSenha } = req.body
       User.update(
-        { _id: req.decoded.id },
+        { _id: req.user.id },
         {
           $set: { ...objSemSenha, password: hash }
         }
@@ -48,7 +47,7 @@ router.patch('/me', (req, res) => {
     })
   } else {
     User.update(
-      { _id: req.decoded.id },
+      { _id: req.user.id },
       {
         $set: req.body
       }
@@ -58,7 +57,7 @@ router.patch('/me', (req, res) => {
   }
 })
 
-//Cria um usuário.  Rota 'api/users/'
+//Cria um usuário. Rota 'api/users/'
 router.post('/', hasRole('csti'), (req, res) => {
   const { name, email, password, roles } = req.body
   if (!name) {

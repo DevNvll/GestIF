@@ -21,9 +21,8 @@ router.get('/stats', (req, res) => {
     const UmaSemana = new Date().getTime() - 7 * 24 * 60 * 60 * 1000
     const numPendentes = reports.filter(r => r.status === 0).length
     const numTotal = reports.length
-    const numResolvidoPor = reports.filter(
-      r => r.resolvidoPor === req.decoded.id
-    ).length
+    const numResolvidoPor = reports.filter(r => r.resolvidoPor === req.user.id)
+      .length
     const maisDeUmaSemana = reports.filter(
       r => r.status === 0 && new Date(r.data).getTime() < UmaSemana
     ).length

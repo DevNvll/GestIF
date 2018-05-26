@@ -13,10 +13,6 @@ export default async function withToken(req, res, next) {
       } else {
         const user = await Users.findOne({ _id: decoded.id })
         req.user = { id: decoded.user, roles: user.roles }
-
-        req.decoded = decoded //todo: remover req.decoded quando tudo tiver migrado pro req.user
-        req.decoded.roles = user.roles
-
         next()
       }
     })

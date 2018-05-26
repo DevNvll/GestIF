@@ -6,10 +6,6 @@ import omit from 'lodash/omit'
 
 const router = Router()
 
-router.get('/', (req, res) => {
-  res.send('test')
-})
-
 router.post('/', (req, res) => {
   User.findOne({ email: req.body.email })
     .select('+password')
