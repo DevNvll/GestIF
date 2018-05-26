@@ -7,7 +7,10 @@ import { Segment, Form, Button, Message } from 'semantic-ui-react'
 import auth from '../utils/AuthService'
 
 export default class Login extends Component {
-  state = {}
+  constructor() {
+    super()
+    this.state = {}
+  }
   componentDidMount() {
     if (auth.loggedIn()) {
       Router.push('/')
@@ -65,6 +68,9 @@ export default class Login extends Component {
               </Button>
             </Form>
           </Segment>
+          <Button color="green" fluid>
+            Fazer um Report à CSTI
+          </Button>
         </div>
       </div>
     )
