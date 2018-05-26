@@ -4,7 +4,7 @@
     "dev": "backpack dev",
     "dev:backend": "cross-env MODE=backend_only backpack dev",
     "build": "next build ./src/client && backpack build",
-    "start": "NODE_ENV=production node build/main.js",
+    "start": "cross-env NODE_ENV=production node build/main.js",
     "lint": "eslint src",
     "precommit": "lint-staged"
   },

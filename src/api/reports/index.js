@@ -89,7 +89,7 @@ router.post('/resolve', (req, res) => {
         $set: {
           status: 1,
           dataResolvido: Date.now(),
-          resolvidoPor: req.decoded.id
+          resolvidoPor: req.user.id
         }
       }
     )
