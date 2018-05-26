@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Head from '~components/head'
+import { Segment, Form, Message } from 'semantic-ui-react'
 
 import auth from '~utils/AuthService'
 
@@ -50,78 +51,64 @@ export default class Login extends Component {
               <b>Formulário de Report</b>
             </a>
           </div>
-          <div className="login-box-body">
-            {this.state.error ? (
-              <center>
-                <p className="text-red">Credenciais Inválidas</p>
-              </center>
-            ) : (
-              <div />
-            )}
-            {this.state.enviado ? (
-              <center>
-                <p className="text-green">Enviado com sucesso!</p>
-              </center>
-            ) : (
-              <div />
-            )}
+          {this.state.enviado && (
+            <center>
+              <Message positive>Enviado com sucesso!</Message>
+            </center>
+          )}
+          <Segment stacked>
             Preencha algumas informações sobre o problema no formulário abaixo.{' '}
             <br />
             <br />
-            <form onSubmit={this.onSubmit.bind(this)}>
-              <div className="form-group has-feedback">
-                <input
+            <Form onSubmit={this.onSubmit.bind(this)}>
+              <Form.Field>
+                <Form.Input
                   type="text"
                   name="nome"
-                  className="form-control"
+                  icon="user"
+                  fluid
                   placeholder="Seu nome"
                   required
                 />
-                <span className="fa fa-user form-control-feedback" />
-              </div>
-              <div className="form-group has-feedback">
-                <input
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
                   type="text"
                   name="maquina"
-                  className="form-control"
+                  icon="computer"
+                  fluid
                   placeholder="ID da máquina"
                   required
                 />
-                <span className="fa fa-desktop form-control-feedback" />
-              </div>
-              <div className="form-group has-feedback">
-                <textarea
-                  type="text"
+              </Form.Field>
+              <Form.Field>
+                <Form.TextArea
                   name="descricao"
-                  className="form-control"
+                  icon="warning"
                   placeholder="Descrição do problema"
                   required
                 />
-                <span className="fa fa-envelope form-control-feedback" />
-              </div>
-              <div className="form-group has-feedback">
-                <input
+              </Form.Field>
+              <Form.Field>
+                <Form.Input
                   type="number"
                   name="lab"
-                  className="form-control"
+                  fluid
+                  icon="key"
                   placeholder="Número da sala"
                   required
                 />
-                <span className="fa fa-home form-control-feedback" />
-              </div>
-              <div className="row">
-                <div className="col-xs-8" />
-                <div className="col-xs-4">
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block btn-flat"
-                  >
-                    Enviar
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+              </Form.Field>
+              <Form.Button
+                icon="check"
+                labelPosition="right"
+                type="submit"
+                secondary
+                content="Enviar"
+                fluid
+              />
+            </Form>
+          </Segment>
         </div>
       </div>
     )
