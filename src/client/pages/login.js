@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Head from '../components/head'
 import Router from 'next/router'
+import Link from 'next/link'
 
-import { Segment, Form, Button, Message } from 'semantic-ui-react'
+import { Segment, Form, Button, Message, Input } from 'semantic-ui-react'
 
 import auth from '../utils/AuthService'
 
@@ -52,11 +53,18 @@ export default class Login extends Component {
                 <div />
               )}
               <Form.Field>
-                <input icon="mail" placeholder="Email" name="email" required />
+                <Input
+                  icon="mail"
+                  iconPosition="left"
+                  placeholder="Email"
+                  name="email"
+                  required
+                />
               </Form.Field>
               <Form.Field>
-                <input
+                <Input
                   icon="lock"
+                  iconPosition="left"
                   type="password"
                   placeholder="Senha"
                   name="password"
@@ -68,9 +76,17 @@ export default class Login extends Component {
               </Button>
             </Form>
           </Segment>
-          <Button color="green" fluid>
-            Fazer um Report à CSTI
-          </Button>
+          <Link href="/csti/reportar">
+            <a>
+              <Button
+                icon="clipboard"
+                color="violet"
+                labelPosition="left"
+                content="Fazer um Report à CSTI"
+                fluid
+              />
+            </a>
+          </Link>
         </div>
       </div>
     )
