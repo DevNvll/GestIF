@@ -1,11 +1,12 @@
 import { Router } from 'express'
 import bcrypt from 'bcrypt'
 import User from '../../models/Users'
+import hasRole from '../hasRole'
 
 const router = Router()
 
 //lista todos os usuários da rota 'api/users/'
-router.get('/', (req, res) => {
+router.get('/', hasRole('csti'), (req, res) => {
   User.find({}).then(users => {
     res.send(users)
   })
@@ -58,7 +59,7 @@ router.patch('/me', (req, res) => {
 })
 
 //Cria um usuário.  Rota 'api/users/'
-router.post('/', (req, res) => {
+router.post('/', hasRole('csti'), (req, res) => {
   const { name, email, password, roles } = req.body
   if (!name) {
     res.status(400).json({
@@ -100,7 +101,7 @@ router.post('/', (req, res) => {
   }
 })
 
-router.delete('/', (req, res) => {
+router.delete('/', hasRole('csti'), (req, res) => {
   const { id, name } = req.body
   User.deleteOne({ _id: id })
     .then(result => {

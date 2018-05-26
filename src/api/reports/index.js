@@ -1,24 +1,14 @@
 import { Router } from 'express'
 import bcrypt from 'bcrypt'
 import Report from '../../models/Reports'
-
+import hasRole from '../hasRole'
 const router = Router()
 
 /* 
 Validação do módulo de Reports:
 Só retorna algum resultado das rotas se tiver a role csti no perfil do usuário.
 */
-router.use((req, res, next) => {
-  if (req.user.roles.includes('csti')) {
-    next()
-  } else {
-    res.status(401).json({
-      error: true,
-      code: 'NO_ROLE',
-      result: {}
-    })
-  }
-})
+router.use(hasRole('csti'))
 
 router.get('/', (req, res) => {
   Report.find({}).then(reports => {
