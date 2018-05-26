@@ -17,10 +17,8 @@ mongoose.connect(process.env.MONGO_URL, err =>
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 
-const app = next({ dev, dir: './src/client' })
-const handler = app.getRequestHandler()
-
 if (process.env.MODE === 'backend_only') {
+  //Inicia o aplicativo em modo apenas backend. (sem parte gráfica)
   console.log(`> Starting in backend only mode`)
   const server = express()
 
@@ -37,7 +35,10 @@ if (process.env.MODE === 'backend_only') {
     console.log(`> Ready on http://localhost:${port}`)
   })
 } else {
+  //Inicia o aplicativo normalmente.
   app.prepare().then(() => {
+    const app = next({ dev, dir: './src/client' })
+    const handler = app.getRequestHandler()
     const server = express()
 
     server.set('secret', '#códigoSuperSecr3to@')
