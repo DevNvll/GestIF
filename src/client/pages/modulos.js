@@ -2,14 +2,16 @@ import React from 'react'
 import Head from '../components/head'
 import Router from 'next/router'
 
-import { setModule } from '../utils/ModulesService'
+import { setModule } from '~utils/ModulesService'
+import Auth from '~utils/AuthService'
+import modulos from '../modulos'
 
-const ModuleCube = ({ name, color, value }) => (
+const ModuleCube = ({ name, color, id }) => (
   <div
     className="cube"
     style={{ backgroundColor: color || '#222', marginTop: '0px' }}
     onClick={() => {
-      setModule(value, name)
+      setModule(id, name)
       Router.push('/')
     }}
   >
@@ -18,16 +20,36 @@ const ModuleCube = ({ name, color, value }) => (
 )
 
 class Modulos extends React.Component {
+  constructor() {
+    super()
+    this.state = { roles: [] }
+  }
+
+  componentDidMount() {
+    Auth.fetch('/api/users/me').then(data => {
+      this.setState({ roles: data.roles })
+    })
+  }
   render() {
     return (
       <React.Fragment>
-        <Head title="Alternar Modulo - GestIF" />
+        <Head title="Seleção de Módulos | GestIF" />
         <div className="cube-container">
           <h1 style={{ margin: '50px' }}>Seleção de módulos</h1>
           <br />
           <div className="cubes">
-            <ModuleCube name="CSTI" value="csti" color="#222" />
-            <ModuleCube name="Direção" value="dir" color="#00abc9" />
+            {this.state.roles &&
+              modulos.map(m => {
+                if (this.state.roles.includes(m.id))
+                  return (
+                    <ModuleCube
+                      key={m.id + m.name}
+                      name={m.name}
+                      id={m.id}
+                      color={m.color}
+                    />
+                  )
+              })}
           </div>
         </div>
         <style jsx global>{`

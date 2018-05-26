@@ -59,7 +59,7 @@ router.patch('/me', (req, res) => {
 
 //Cria um usuário.  Rota 'api/users/'
 router.post('/', (req, res) => {
-  const { name, email, password, setor } = req.body
+  const { name, email, password, roles } = req.body
   if (!name) {
     res.status(400).json({
       code: 'MISSING_FIELD_NAME',
@@ -77,7 +77,7 @@ router.post('/', (req, res) => {
     })
   } else {
     bcrypt.hash(password, 10).then(hash => {
-      const newUser = new User({ name, email, setor, password: hash })
+      const newUser = new User({ name, email, roles, password: hash })
       User.findOne({ email }).then(result => {
         if (!result) {
           newUser.save().then(user => {
@@ -85,7 +85,7 @@ router.post('/', (req, res) => {
               id: user._id,
               name: user.name,
               email: user.email,
-              setor: user.setor,
+              roles: user.roles,
               join_date: user.joined
             })
           })

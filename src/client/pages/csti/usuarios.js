@@ -9,14 +9,14 @@ import {
   Dropdown
 } from 'semantic-ui-react'
 
-import Auth from '../utils/AuthService'
-import Page from '../layouts/main'
-import Head from '../components/head'
+import Auth from '~utils/AuthService'
+import Page from '~layouts/main'
+import Head from '~components/head'
 
-import FormAddUser from '../components/usuarios/FormAddUser'
-import TableListaUsuarios from '../components/usuarios/TableListaUsuarios'
-import ModalSuccess from '../components/usuarios/ModalSuccess'
-import ModalDeletaUser from '../components/usuarios/ModalDeletaUser'
+import FormAddUser from '~components/usuarios/FormAddUser'
+import TableListaUsuarios from '~components/usuarios/TableListaUsuarios'
+import ModalSuccess from '~components/usuarios/ModalSuccess'
+import ModalDeletaUser from '~components/usuarios/ModalDeletaUser'
 
 class Usuarios extends React.Component {
   constructor() {

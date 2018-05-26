@@ -27,13 +27,13 @@ export default class extends Document {
             href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
             rel="stylesheet"
           />
-          <script src="./static/js/jquery.min.js" />
+          <script src="../static/js/jquery.min.js" />
         </Head>
         <body className="login-page hold-transition skin-black sidebar-mini">
-          <script src="./static/js/bootstrap.min.js" />
-          <script src="./static/js/app.min.js" />
-          <script src="./static/js/pace.min.js" />
-          <script src="./static/fix.js" />
+          <script src="../static/js/bootstrap.min.js" />
+          <script src="../static/js/app.min.js" />
+          <script src="../static/js/pace.min.js" />
+          <script src="../static/fix.js" />
           <Main />
           <NextScript />
         </body>

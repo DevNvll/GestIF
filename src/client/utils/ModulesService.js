@@ -1,4 +1,6 @@
 import Router from 'next/router'
+import modulos from '../modulos'
+
 const isBrowser = typeof window !== 'undefined'
 
 export const getModule = () => {
@@ -6,12 +8,14 @@ export const getModule = () => {
   return module ? JSON.parse(localStorage.getItem('module')) : {}
 }
 
-export const setModule = (value, name) => {
+export const setModule = (id, name) => {
   Router.push('/')
-  localStorage.setItem('module', JSON.stringify({ name: name, value: value }))
+  localStorage.setItem('module', JSON.stringify({ name, id }))
   return
 }
 
-export const isModuleChosen = () => {
-  return isBrowser && localStorage.getItem('module') ? true : false
-}
+export const isModuleChosen = () =>
+  isBrowser && localStorage.getItem('module') ? true : false
+
+export const getModuleMenu = modulo =>
+  modulos.filter(obj => obj.id === modulo)[0].menu

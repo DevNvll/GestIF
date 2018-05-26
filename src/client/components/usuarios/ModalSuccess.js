@@ -1,11 +1,11 @@
 import React from 'react'
-import { Modal, Button, Icon, Header } from 'semantic-ui-react'
+import { Modal, Button, Icon, Header, Label } from 'semantic-ui-react'
 
 const ModalSuccess = ({
   open,
   handleClose,
   handleConfirm,
-  data: { name, email, setor, password }
+  data: { name, email, roles, password }
 }) => (
   <Modal
     open={open}
@@ -25,7 +25,12 @@ const ModalSuccess = ({
       <h3>
         <b>Nome:</b> {name} <br />
         <b>E-mail:</b> {email} <br />
-        <b>Setor:</b> {setor} <br />
+        <b>Setor(s):</b>{' '}
+        {roles &&
+          roles.map(s => {
+            return <Label key={s}>{s}</Label>
+          })}{' '}
+        <br />
         <b>Senha:</b> {password} <br />
       </h3>
       <br />

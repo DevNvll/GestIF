@@ -28,7 +28,7 @@ class FormAddUser extends React.Component {
     this.setState({
       form: {
         ...this.state.form,
-        setor: data.value
+        roles: data.value
       }
     })
   }
@@ -36,7 +36,7 @@ class FormAddUser extends React.Component {
     this.setState({
       form: {
         ...this.state.form,
-        [e.target.name]: e.target.value || data.value
+        [e.target.name]: e.target.value
       }
     })
   }
@@ -67,13 +67,14 @@ class FormAddUser extends React.Component {
           <Dropdown
             placeholder="Setor..."
             onChange={this.handleSetorChange}
-            name="setor"
+            name="roles"
             selection
+            multiple
             fluid
             required
             options={[
-              { key: 'csti', value: 'CSTI', text: 'CSTI' },
-              { key: 'dir', value: 'Dir', text: 'Direção' }
+              { key: 'csti', value: 'csti', text: 'CSTI' },
+              { key: 'dir', value: 'direcao', text: 'Direção' }
             ]}
           />
         </Form.Field>

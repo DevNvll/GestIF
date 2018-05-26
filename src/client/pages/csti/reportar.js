@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Head from '../components/head'
-import Router from 'next/router'
+import Head from '~components/head'
 
-import auth from '../utils/AuthService'
+import auth from '~utils/AuthService'
 
 export default class Login extends Component {
   constructor() {

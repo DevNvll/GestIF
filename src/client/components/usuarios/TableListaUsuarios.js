@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Label, Button, Icon } from 'semantic-ui-react'
+import { Table, Button, Label } from 'semantic-ui-react'
 
 function addZero(i) {
   if (i < 10) {
@@ -26,7 +26,11 @@ const TableListaUsuarios = ({ users, deleteUser }) => (
           <Table.Row key={user._id}>
             <Table.Cell>{user.name}</Table.Cell>
             <Table.Cell>{user.email}</Table.Cell>
-            <Table.Cell>{user.setor}</Table.Cell>
+            <Table.Cell>
+              {user.roles.map(s => {
+                return <Label>{s}</Label>
+              })}
+            </Table.Cell>
             <Table.Cell>
               {new Date(user.joined).toLocaleDateString('en-GB')} às{' '}
               {new Date(user.joined).getHours() +

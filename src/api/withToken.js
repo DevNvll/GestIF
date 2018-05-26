@@ -1,16 +1,22 @@
 import jwt from 'jsonwebtoken'
+import Users from '../models/Users'
 
-export default function withToken(req, res, next) {
+export default async function withToken(req, res, next) {
   let token = req.body.token || req.query.token || req.headers['authorization']
   if (token) {
-    jwt.verify(token, req.app.get('secret'), (err, decoded) => {
+    jwt.verify(token, req.app.get('secret'), async (err, decoded) => {
       if (err) {
         return res.json({
           success: false,
           message: 'Failed to authenticate token.'
         })
       } else {
-        req.decoded = decoded
+        const user = await Users.findOne({ _id: decoded.id })
+        req.user = { id: decoded.user, roles: user.roles }
+
+        req.decoded = decoded //todo: remover req.decoded quando tudo tiver migrado pro req.user
+        req.decoded.roles = user.roles
+
         next()
       }
     })

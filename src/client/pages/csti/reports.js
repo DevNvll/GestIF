@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Auth from '../utils/AuthService'
+import Auth from '~utils/AuthService'
 import filter from 'lodash/filter'
 import { Tab, Message } from 'semantic-ui-react'
 
-import Page from '../layouts/main'
-import Head from '../components/head'
+import Page from '~layouts/main'
+import Head from '~components/head'
 
-import TablePendentes from '../components/reports/TablePendentes'
-import TableHistorico from '../components/reports/TableHistorico'
+import TablePendentes from '~components/reports/TablePendentes'
+import TableHistorico from '~components/reports/TableHistorico'
 
 export default class Reports extends Component {
   constructor(props) {

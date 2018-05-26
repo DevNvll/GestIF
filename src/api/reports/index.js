@@ -4,6 +4,23 @@ import Report from '../../models/Reports'
 
 const router = Router()
 
+/* 
+Validação do módulo de Reports:
+Só retorna algum resultado das rotas se tiver a role csti no perfil do usuário.
+*/
+router.use((req, res, next) => {
+  if (req.user.roles.includes('cstis')) {
+    next()
+  } else {
+    res.status(401).json({
+      error: true,
+      status: 'ERROR',
+      code: 'NO_ROLE',
+      result: {}
+    })
+  }
+})
+
 router.get('/', (req, res) => {
   Report.find({}).then(reports => {
     res.send(reports)
