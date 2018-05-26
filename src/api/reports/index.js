@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import bcrypt from 'bcrypt'
 import Report from '../../models/Reports'
-import hasRole from '../hasRole'
+import hasRole from '../middlewares/hasRole'
 const router = Router()
 
 /* 

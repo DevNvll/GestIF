@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import withToken from './withToken'
+import withToken from './middlewares/withToken'
 
 import auth from './auth'
 import users from './users'
