@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table, Button, Label } from 'semantic-ui-react'
+import Link from 'next/link'
+import { Table, Button, Label, Icon } from 'semantic-ui-react'
 
 function addZero(i) {
   if (i < 10) {
@@ -38,16 +39,18 @@ const TableListaUsuarios = ({ users, deleteUser }) => (
                 addZero(new Date(user.joined).getMinutes())}
             </Table.Cell>
             <Table.Cell>
-              <Button
-                color="red"
-                size="tiny"
-                compact
-                onClick={() => deleteUser(user._id, user.name)}
-                icon="x"
-                content="Deletar"
-                fluid
-                labelPosition="left"
-              />
+              <Button.Group size="tiny">
+                <Link href={'?user=' + user._id}>
+                  <Button color="grey" size="tiny" compact content="Editar" />
+                </Link>
+                <Button.Or text="ou" />
+                <Button
+                  compact
+                  onClick={() => deleteUser(user._id, user.name)}
+                  content="Deletar"
+                  color="red"
+                />
+              </Button.Group>
             </Table.Cell>
           </Table.Row>
         )

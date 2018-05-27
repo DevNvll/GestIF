@@ -14,6 +14,7 @@ import Page from '~layouts/main'
 import Head from '~components/head'
 
 import FormAddUser from '~components/usuarios/FormAddUser'
+import FormEditUser from '~components/usuarios/FormEditUser'
 import TableListaUsuarios from '~components/usuarios/TableListaUsuarios'
 import ModalSuccess from '~components/usuarios/ModalSuccess'
 import ModalDeletaUser from '~components/usuarios/ModalDeletaUser'
@@ -25,6 +26,7 @@ class Usuarios extends React.Component {
       success: false,
       created: false,
       data: {},
+      userToEdit: '',
       userList: [],
       userToDelete: {}
     }
@@ -57,6 +59,14 @@ class Usuarios extends React.Component {
     this.setState({
       success: true,
       data: e
+    })
+  }
+  onEditSubmit(data, id) {
+    Auth.fetch('/api/users/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    }).then(() => {
+      this.setState({ edited: true })
     })
   }
   handleClose() {
@@ -94,7 +104,7 @@ class Usuarios extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="/usuarios">Usuários</a>
+                <a href="./usuarios">Usuários</a>
               </li>
             </ol>
           </section>
@@ -103,7 +113,11 @@ class Usuarios extends React.Component {
               <div className="col-md-12">
                 <div className="box box-success">
                   <div className="box-header">
-                    <h3>Cadastro de usuário</h3>
+                    <h3>
+                      {!this.props.url.query.user
+                        ? 'Cadastro de usuário'
+                        : 'Editar usuário'}
+                    </h3>
                   </div>
                   <div className="box-body">
                     <Message
@@ -113,6 +127,14 @@ class Usuarios extends React.Component {
                     >
                       <Message.Header>Sucesso!</Message.Header>
                       <p>O usuário foi cadastrado!</p>
+                    </Message>
+                    <Message
+                      hidden={!this.state.edited}
+                      positive
+                      onDismiss={() => this.setState({ edited: false })}
+                    >
+                      <Message.Header>Sucesso!</Message.Header>
+                      <p>O usuário foi atualizado!</p>
                     </Message>
                     <ModalSuccess
                       open={this.state.success}
@@ -126,20 +148,27 @@ class Usuarios extends React.Component {
                       handleConfirm={this.confirmDeleteUser.bind(this)}
                       userToDelete={this.state.userToDelete}
                     />
-                    <FormAddUser onSubmit={this.onSubmit.bind(this)} />
+                    {(this.props.url.query.user && (
+                      <FormEditUser
+                        user={this.props.url.query.user}
+                        onSubmit={this.onEditSubmit.bind(this)}
+                      />
+                    )) || <FormAddUser onSubmit={this.onSubmit.bind(this)} />}
                   </div>
                 </div>
-                <div className="box box-primary">
-                  <div className="box-header">
-                    <h3>Lista de usuários</h3>
+                {!this.props.url.query.user && (
+                  <div className="box box-primary">
+                    <div className="box-header">
+                      <h3>Lista de usuários</h3>
+                    </div>
+                    <div className="box-body">
+                      <TableListaUsuarios
+                        users={this.state.userList}
+                        deleteUser={this.deleteUser.bind(this)}
+                      />
+                    </div>
                   </div>
-                  <div className="box-body">
-                    <TableListaUsuarios
-                      users={this.state.userList}
-                      deleteUser={this.deleteUser.bind(this)}
-                    />
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </section>

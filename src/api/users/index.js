@@ -12,6 +12,23 @@ router.get('/', hasRole('csti'), (req, res) => {
   })
 })
 
+router.get('/:id', hasRole('csti'), (req, res) => {
+  User.find({ _id: req.params.id }).then(users => {
+    res.send(users[0])
+  })
+})
+
+router.patch('/:id', hasRole('csti'), (req, res) => {
+  User.update(
+    { _id: req.params.id },
+    {
+      $set: req.body
+    }
+  ).then(user => {
+    res.send(user)
+  })
+})
+
 //Atualiza os dados de um usuário na rota 'api/users/'
 router.patch('/', (req, res) => {
   User.update(
