@@ -27,11 +27,11 @@ const ListItem = ({
       <Table.Cell>{lab}</Table.Cell>
       <Table.Cell>{descricao}</Table.Cell>
       <Table.Cell>{nome}</Table.Cell>
-      <Table.Cell>
+      <Table.Cell collapsing>
         {new Date(data).toLocaleDateString('en-GB')} às{' '}
         {new Date(data).getHours() + ':' + addZero(new Date(data).getMinutes())}
       </Table.Cell>
-      <Table.Cell>
+      <Table.Cell collapsing>
         {status === 1 ? (
           <React.Fragment>
             Resolvido em {new Date(dataResolvido).toLocaleDateString('en-GB')}{' '}
@@ -45,14 +45,13 @@ const ListItem = ({
         )}
       </Table.Cell>
       {resolvido && (
-        <Table.Cell>
+        <Table.Cell collapsing>
           <Button
             color="green"
             size="tiny"
             onClick={() => resolvido(id)}
             icon="check"
             content="Marcar como resolvido"
-            fluid
             labelPosition="right"
           />
         </Table.Cell>
