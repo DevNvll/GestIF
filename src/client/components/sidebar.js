@@ -26,7 +26,10 @@ const MenuItem = props => {
       <ul className="treeview-menu">
         {props.submenu.map((item, i) => {
           return (
-            <li key={i}>
+            <li
+              key={i}
+              className={props.router.pathname === item.href ? 'active' : ''}
+            >
               <Link prefetch href={item.href}>
                 <a onClick={() => onClick()}>
                   <i className={item.icon} />
