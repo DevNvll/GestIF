@@ -28,7 +28,7 @@ const TableListaUsuarios = ({ users, deleteUser }) => (
             <Table.Cell>{user.email}</Table.Cell>
             <Table.Cell>
               {user.roles.map(s => {
-                return <Label>{s}</Label>
+                return <Label key={s}>{s}</Label>
               })}
             </Table.Cell>
             <Table.Cell>
