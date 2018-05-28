@@ -3,6 +3,7 @@ import next from 'next'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
+import compression from 'compression'
 
 import api from './api'
 
@@ -18,9 +19,10 @@ const MONGO_URL = dev
   : process.env.MONGO_URL
 
 mongoose.Promise = global.Promise
-mongoose.connect(MONGO_URL, err =>
-  console.log('> Conectado ao MongoDB em', MONGO_URL)
-)
+mongoose.connect(MONGO_URL, err => {
+  if (!err) console.log('> Conectado ao MongoDB em', MONGO_URL)
+  else console.log('> Erro ao conectar ao MongoDB em', MONGO_URL)
+})
 
 const server = express()
 
@@ -28,6 +30,7 @@ server.set('secret', '#códigoSuperSecr3to@')
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(morgan('dev'))
 server.use(bodyParser.json())
+if (!dev) server.use(compression()) // adiciona compressão gzip a todos os requests
 
 //registra rota padrão da API. Não mexer.
 server.use('/api', api)
