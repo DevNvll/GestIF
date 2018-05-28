@@ -18,7 +18,9 @@ const MONGO_URL = dev
   : process.env.MONGO_URL
 
 mongoose.Promise = global.Promise
-mongoose.connect(MONGO_URL, err => console.log('> Conectado ao MongoDB'))
+mongoose.connect(MONGO_URL, err =>
+  console.log('> Conectado ao MongoDB em', MONGO_URL)
+)
 
 if (process.env.MODE === 'backend_only') {
   //Inicia o aplicativo em modo apenas backend. (sem parte gráfica)
