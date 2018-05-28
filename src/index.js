@@ -27,7 +27,7 @@ mongoose.connect(MONGO_URL, err => {
 
 const server = express()
 
-server.set('secret', '#códigoSuperSecr3to@')
+server.set('secret', process.env.SECRET)
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(morgan('dev'))
 server.use(bodyParser.json())
