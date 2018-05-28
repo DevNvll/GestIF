@@ -12,7 +12,6 @@ export default async function withToken(req, res, next) {
         })
       } else {
         const user = await Users.findOne({ _id: decoded.id })
-        console.log(decoded.id)
         req.user = { id: decoded.id, roles: user.roles }
         next()
       }

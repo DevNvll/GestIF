@@ -105,7 +105,7 @@ router.post('/', hasRole('csti'), (req, res) => {
 })
 
 router.delete('/', hasRole('csti'), (req, res) => {
-  const { id, name } = req.body
+  const { id } = req.body
   User.deleteOne({ _id: id })
     .then(result => {
       res.send(result)
