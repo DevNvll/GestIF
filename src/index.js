@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import compression from 'compression'
+import helmet from 'helmet'
 
 import api from './api'
 
@@ -30,6 +31,7 @@ server.set('secret', '#códigoSuperSecr3to@')
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(morgan('dev'))
 server.use(bodyParser.json())
+server.use(helmet()) // adiciona headers de segurança às rotas
 if (!dev) server.use(compression()) // adiciona compressão gzip a todos os requests
 
 //registra rota padrão da API. Não mexer.
