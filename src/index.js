@@ -22,18 +22,20 @@ mongoose.connect(MONGO_URL, err =>
   console.log('> Conectado ao MongoDB em', MONGO_URL)
 )
 
+const server = express()
+
+server.set('secret', '#códigoSuperSecr3to@')
+server.use(bodyParser.urlencoded({ extended: false }))
+server.use(morgan('dev'))
+server.use(bodyParser.json())
+
+//registra rota padrão da API. Não mexer.
+server.use('/api', api)
+
 if (process.env.MODE === 'backend_only') {
   //Inicia o aplicativo em modo apenas backend. (sem parte gráfica)
   console.log(`> Starting in backend only mode`)
-  const server = express()
 
-  server.set('secret', '#códigoSuperSecr3to@')
-  server.use(bodyParser.urlencoded({ extended: false }))
-  server.use(morgan('dev'))
-  server.use(bodyParser.json())
-
-  //registra rota padrão da API. Não mexer.
-  server.use('/api', api)
   //registra rota padrão do app. Não mexer.
   server.listen(port, err => {
     if (err) throw err
@@ -44,15 +46,6 @@ if (process.env.MODE === 'backend_only') {
   const app = next({ dev, dir: './src/client' })
   const handler = app.getRequestHandler()
   app.prepare().then(() => {
-    const server = express()
-
-    server.set('secret', '#códigoSuperSecr3to@')
-    server.use(bodyParser.urlencoded({ extended: false }))
-    server.use(morgan('tiny'))
-    server.use(bodyParser.json())
-
-    //registra rota padrão da API. Não mexer.
-    server.use('/api', api)
     //registra rota padrão do app. Não mexer.
     server.get('*', handler)
 
