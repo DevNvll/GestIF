@@ -53,18 +53,10 @@ export default class Login extends Component {
                 <div />
               )}
               <Form.Field>
-                <Input
-                  icon="mail"
-                  iconPosition="left"
-                  placeholder="Email"
-                  name="email"
-                  required
-                />
+                <Input placeholder="Email" name="email" required />
               </Form.Field>
               <Form.Field>
                 <Input
-                  icon="lock"
-                  iconPosition="left"
                   type="password"
                   placeholder="Senha"
                   name="password"
