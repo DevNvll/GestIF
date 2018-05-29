@@ -1,4 +1,4 @@
-import express, { Router } from 'express'
+import express from 'express'
 import next from 'next'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import compression from 'compression'
 import helmet from 'helmet'
 
-import api from './api'
+import api from './server/api'
 
 import dotenv from 'dotenv'
 dotenv.config()
