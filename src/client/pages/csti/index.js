@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
+import ReportChart from '../../components/csti/ChartReports'
+
 import Page from '~layouts/main'
 import Head from '~components/head'
 import Auth from '~utils/AuthService'
-
 class Home extends Component {
   constructor() {
     super()
     this.state = {
-      stats: {}
+      stats: {},
+      count: [],
+      byMe: []
     }
   }
   componentDidMount() {
     Auth.fetch('/api/reports/stats').then(data => {
       this.setState({ stats: data })
+    })
+    Auth.fetch('/api/reports/count').then(data => {
+      this.setState({ count: data })
+    })
+    Auth.fetch('/api/reports/count/me').then(data => {
+      this.setState({ byMe: data })
     })
   }
   render() {
@@ -108,6 +117,37 @@ class Home extends Component {
                     Ir para reports <i className="fa fa-arrow-circle-right" />
                   </a>
                 </Link>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="box box-info">
+                <div className="box-header with-border">
+                  <h3 className="box-title">
+                    Gráfico de reports nos últimos seis meses
+                  </h3>
+                </div>
+                <div className="box-body">
+                  <div className="chart">
+                    {this.state.count && (
+                      <ReportChart
+                        data={{
+                          total: this.state.count,
+                          byMe: this.state.byMe
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="box box-success">
+                <div className="box-header with-border">
+                  <h3 className="box-title">Logs do sistema</h3>
+                </div>
+                <div className="box-body">
+                  <div className="chart">TO BE IMPLEMENTED</div>
+                </div>
               </div>
             </div>
           </section>

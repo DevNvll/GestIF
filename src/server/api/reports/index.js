@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import bcrypt from 'bcrypt'
+import moment from 'moment'
 import Report from '../../models/Reports'
 import hasRole from '../middlewares/hasRole'
 const router = Router()
@@ -32,6 +33,119 @@ router.get('/stats', (req, res) => {
       numResolvidoPor,
       maisDeUmaSemana
     })
+  })
+})
+
+router.get('/count', (req, res) => {
+  Report.aggregate([
+    {
+      $match: {
+        data: {
+          $gte: moment()
+            .subtract(5, 'months')
+            .toDate(),
+          $lt: moment().toDate()
+        }
+      }
+    },
+    {
+      $group: {
+        _id: {
+          month: { $month: '$data' }
+        },
+        count: {
+          $sum: 1
+        }
+      }
+    }
+  ]).then(reports => {
+    const months = new Array(
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    )
+    const result = []
+    const thisMonth = new Date().getMonth() + 1
+    for (let x = thisMonth - 5; x <= thisMonth; x++) {
+      let month = reports.find(r => r._id.month === x)
+      if (month)
+        result.push({
+          month: months[x],
+          count: month.count
+        })
+      else
+        result.push({
+          month: months[x],
+          count: 0
+        })
+    }
+    res.send(result)
+  })
+})
+
+router.get('/count/me', (req, res) => {
+  Report.aggregate([
+    {
+      $match: {
+        resolvidoPor: req.user.id,
+        data: {
+          $gte: moment()
+            .subtract(5, 'months')
+            .toDate(),
+          $lt: moment().toDate()
+        }
+      }
+    },
+    {
+      $group: {
+        _id: {
+          month: { $month: '$data' }
+        },
+        count: {
+          $sum: 1
+        }
+      }
+    }
+  ]).then(reports => {
+    const months = new Array(
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+    )
+    const result = []
+    const thisMonth = new Date().getMonth() + 1
+    for (let x = thisMonth - 5; x <= thisMonth; x++) {
+      let month = reports.find(r => r._id.month === x)
+      if (month)
+        result.push({
+          month: months[x],
+          count: month.count
+        })
+      else
+        result.push({
+          month: months[x],
+          count: 0
+        })
+    }
+    res.send(result)
   })
 })
 
