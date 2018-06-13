@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-import ReportChart from '../../components/csti/ChartReports'
 
+import { Button } from 'semantic-ui-react'
+
+import ChartReports from '~components/csti/ChartReports'
+import TableLogs from '~components/csti/TableLogs'
 import Page from '~layouts/main'
 import Head from '~components/head'
 import Auth from '~utils/AuthService'
+
 class Home extends Component {
   constructor() {
     super()
     this.state = {
       stats: {},
       count: [],
-      byMe: []
+      byMe: [],
+      logs: []
     }
   }
   componentDidMount() {
@@ -24,6 +29,13 @@ class Home extends Component {
     Auth.fetch('/api/reports/count/me').then(data => {
       this.setState({ byMe: data })
     })
+    Auth.fetch('/api/logs?limit=10')
+      .then(data => {
+        this.setState({ logs: data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   render() {
     return (
@@ -55,7 +67,7 @@ class Home extends Component {
                     style={{ paddingTop: '20px', fontSize: '80px' }}
                   />
                 </div>
-                <Link href="/reports">
+                <Link href="/csti/reports">
                   <a className="small-box-footer">
                     Ir para reports <i className="fa fa-arrow-circle-right" />
                   </a>
@@ -74,7 +86,7 @@ class Home extends Component {
                     style={{ paddingTop: '20px', fontSize: '80px' }}
                   />
                 </div>
-                <Link href="/reports">
+                <Link href="/csti/reports">
                   <a className="small-box-footer">
                     Ir para reports <i className="fa fa-arrow-circle-right" />
                   </a>
@@ -93,7 +105,7 @@ class Home extends Component {
                     style={{ paddingTop: '20px', fontSize: '80px' }}
                   />
                 </div>
-                <Link href="/reports">
+                <Link href="/csti/reports">
                   <a className="small-box-footer">
                     Ir para reports <i className="fa fa-arrow-circle-right" />
                   </a>
@@ -112,7 +124,7 @@ class Home extends Component {
                     style={{ paddingTop: '20px', fontSize: '80px' }}
                   />
                 </div>
-                <Link href="/reports">
+                <Link href="/csti/reports">
                   <a className="small-box-footer">
                     Ir para reports <i className="fa fa-arrow-circle-right" />
                   </a>
@@ -129,7 +141,7 @@ class Home extends Component {
                 <div className="box-body">
                   <div className="chart">
                     {this.state.count && (
-                      <ReportChart
+                      <ChartReports
                         data={{
                           total: this.state.count,
                           byMe: this.state.byMe
@@ -146,7 +158,14 @@ class Home extends Component {
                   <h3 className="box-title">Logs do sistema</h3>
                 </div>
                 <div className="box-body">
-                  <div className="chart">TO BE IMPLEMENTED</div>
+                  <TableLogs logs={this.state.logs} />
+                  <Link href="csti/logs">
+                    <a>
+                      <Button secondary fluid style={{ marginTop: '10px' }}>
+                        Ver todos os logs
+                      </Button>
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

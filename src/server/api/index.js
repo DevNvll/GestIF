@@ -4,6 +4,7 @@ import withToken from './middlewares/withToken'
 import auth from './auth'
 import users from './users'
 import reports from './reports'
+import logs from './logs'
 
 const router = Router()
 
@@ -12,5 +13,6 @@ const router = Router()
 router.use('/auth', auth)
 router.use('/users', withToken, users)
 router.use('/reports', withToken, reports)
+router.use('/logs', withToken, logs)
 
 export default router

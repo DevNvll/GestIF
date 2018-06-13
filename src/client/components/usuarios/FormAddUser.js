@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button, Dropdown } from 'semantic-ui-react'
+import modulos from '../../modulos'
 
 function generatePassword() {
   var length = 8,
@@ -72,10 +73,9 @@ class FormAddUser extends React.Component {
             multiple
             fluid
             required
-            options={[
-              { key: 'csti', value: 'csti', text: 'CSTI' },
-              { key: 'dir', value: 'direcao', text: 'Direção' }
-            ]}
+            options={modulos.map(m => {
+              return { key: m.id, value: m.id, text: m.name }
+            })}
           />
         </Form.Field>
         <Form.Field>

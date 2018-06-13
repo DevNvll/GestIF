@@ -12,7 +12,7 @@ export default async function withToken(req, res, next) {
         })
       } else {
         const user = await Users.findOne({ _id: decoded.id })
-        req.user = { id: decoded.id, roles: user.roles }
+        req.user = { id: decoded.id, roles: user.roles, name: user.name }
         next()
       }
     })

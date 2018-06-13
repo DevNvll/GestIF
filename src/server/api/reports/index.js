@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt'
 import moment from 'moment'
 import Report from '../../models/Reports'
 import hasRole from '../middlewares/hasRole'
+import Log from '../../utils/LogService'
+
 const router = Router()
 
 /* 
@@ -181,6 +183,7 @@ router.post('/create', (req, res) => {
     newReport
       .save()
       .then(report => {
+        Log('REPORT', 'Report feito.', null, '#ffb641')
         res.send(report)
       })
       .catch(err => {
@@ -208,6 +211,12 @@ router.post('/resolve', (req, res) => {
       }
     )
       .then(report => {
+        Log(
+          'REPORT',
+          'Report resolvido por ' + req.user.name + '.',
+          req.user.name,
+          '#ffb641'
+        )
         res.json({ status: 'SUCCESS', result: report })
       })
       .catch(err => {

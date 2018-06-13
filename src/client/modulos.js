@@ -24,6 +24,11 @@ const modulos = [
             icon: 'fa fa-id-card'
           },
           {
+            text: 'Logs',
+            href: '/csti/logs',
+            icon: 'fa fa-list'
+          },
+          {
             text: 'Sobre',
             href: '/sobre',
             icon: 'fa fa-info'

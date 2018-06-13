@@ -2,6 +2,7 @@ import { Router } from 'express'
 import bcrypt from 'bcrypt'
 import User from '../../models/Users'
 import hasRole from '../middlewares/hasRole'
+import Log from '../../utils/LogService'
 
 const router = Router()
 
@@ -85,6 +86,12 @@ router.post('/', hasRole('csti'), (req, res) => {
       User.findOne({ email }).then(result => {
         if (!result) {
           newUser.save().then(user => {
+            Log(
+              'USUARIO',
+              user.name + ' registrado.',
+              req.user.name,
+              'rgb(0, 192, 239)'
+            )
             res.send({
               id: user._id,
               name: user.name,
@@ -108,6 +115,12 @@ router.delete('/', hasRole('csti'), (req, res) => {
   const { id } = req.body
   User.deleteOne({ _id: id })
     .then(result => {
+      Log(
+        'USUARIO',
+        user.name + ' removido.',
+        req.user.name,
+        'rgb(0, 192, 239)'
+      )
       res.send(result)
     })
     .catch(err => {

@@ -2,7 +2,7 @@ import { Router } from 'express'
 import User from '../../models/Users'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import omit from 'lodash/omit'
+import Log from '../../utils/LogService'
 
 const router = Router()
 
@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
       bcrypt.compare(req.body.password, result.password).then(passed => {
         if (passed) {
           jwt.sign({ id: result._id }, req.app.get('secret'), (err, token) => {
+            Log('LOGIN', result.name + ' logou.', result.name, '#1bff80')
             res.status(200).json({
               code: 'LOGIN_SUCCESS',
               result: {
