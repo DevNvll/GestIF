@@ -17,9 +17,7 @@ const userSchema = new Schema({
     required: true,
     select: false
   },
-  joined: { type: Date, default: Date.now },
-  role: { type: Number, default: 1 },
-  setor: String
+  joined: { type: Date, default: Date.now }
 })
 
 export default mongoose.model('User', userSchema)
