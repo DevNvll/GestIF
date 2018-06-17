@@ -14,9 +14,11 @@ Só retorna algum resultado das rotas se tiver a role csti no perfil do usuário
 router.use(hasRole('csti'))
 
 router.get('/', (req, res) => {
-  Report.find({}).then(reports => {
-    res.send(reports)
-  })
+  Report.find({})
+    .sort({ data: -1 })
+    .then(reports => {
+      res.send(reports)
+    })
 })
 
 router.get('/stats', (req, res) => {
@@ -149,47 +151,6 @@ router.get('/count/me', (req, res) => {
     }
     res.send(result)
   })
-})
-
-router.post('/create', (req, res) => {
-  const { maquina, descricao, nome, lab } = req.body
-  if (!maquina) {
-    res.status(400).json({
-      code: 'MISSING_FIELD_MAQUINA',
-      result: {}
-    })
-  } else if (!descricao) {
-    res.status(400).json({
-      code: 'MISSING_FIELD_EMAIL',
-      result: {}
-    })
-  } else if (!nome) {
-    res.status(400).json({
-      code: 'MISSING_FIELD_PASSWORD',
-      result: {}
-    })
-  } else if (!lab) {
-    res.status(400).json({
-      code: 'MISSING_FIELD_LAB',
-      result: {}
-    })
-  } else {
-    const newReport = new Report({
-      maquina,
-      descricao,
-      nome,
-      lab
-    })
-    newReport
-      .save()
-      .then(report => {
-        Log('REPORT', 'Report feito.', null, '#ffb641')
-        res.send(report)
-      })
-      .catch(err => {
-        res.send({ status: 'ERROR' })
-      })
-  }
 })
 
 router.post('/resolve', (req, res) => {

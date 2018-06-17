@@ -13,15 +13,23 @@ router.get('/', (req, res) => {
   if (req.query.limit) {
     Logs.find({})
       .sort({ data: -1 })
-      .limit(req.query.limit)
+      .limit(parseInt(req.query.limit))
       .then(logs => {
         res.send(logs)
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err)
       })
   } else {
     Logs.find({})
       .sort({ data: -1 })
       .then(logs => {
         res.send(logs)
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err)
       })
   }
 })

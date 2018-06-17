@@ -16,7 +16,7 @@ export default class Login extends Component {
     window.Pace.start()
     const { nome, descricao, maquina, lab } = e.target
     auth
-      .fetch('/api/reports/create', {
+      .fetch('/api/reportar', {
         method: 'POST',
         body: JSON.stringify({
           nome: nome.value,
@@ -28,18 +28,6 @@ export default class Login extends Component {
       .then(res => {
         this.setState({ enviado: true })
       })
-    // auth
-    //   .login(e.target.email.value, e.target.password.value)
-    //   .then(() => {
-    //     window.Pace.stop()
-    //     Router.push('/')
-    //   })
-    //   .catch(err => {
-    //     window.Pace.stop()
-    //     if (err === 'LOGIN_FAIL') {
-    //       this.setState({ error: err })
-    //     }
-    //   })
   }
   render() {
     return (
